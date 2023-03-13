@@ -9,6 +9,6 @@ void ContrastAlgorithm::insertMaxParameterConfiguration() {
 	this->maxParameters.emplace(AlgorithmsParameterEnum::CONTRASTLEVEL, 5);
 }
 
-void ContrastAlgorithm::process() {
+void ContrastAlgorithm::process(ImageResolutionQuery& imageResolutionQuery) {
 
 }

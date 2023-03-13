@@ -1,11 +1,11 @@
-#ifndef ISLAND_REMOVAL_ALGORITHM_HPP
-#define ISLAND_REMOVAL_ALGORITHM_HPP
+#ifndef IMAGE_READER_ALGORITHM_HPP
+#define IMAGE_READER_ALGORITHM_HPP
 
 #include "Algorithm.hpp"
 
-class IslandRemovalAlgorithm : public Algorithm {
+class ImageReaderAlgorithm : public Algorithm {
 public:
-	IslandRemovalAlgorithm();
+	ImageReaderAlgorithm();
 	virtual void process(ImageResolutionQuery& imageResolutionQuery) override;
 
 private:

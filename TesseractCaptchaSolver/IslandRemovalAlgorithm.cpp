@@ -10,6 +10,6 @@ void IslandRemovalAlgorithm::insertMaxParameterConfiguration() {
 	this->maxParameters.emplace(AlgorithmsParameterEnum::ISLANDREMOVALTYPE, 3);
 }
 
-void IslandRemovalAlgorithm::process() {
+void IslandRemovalAlgorithm::process(ImageResolutionQuery& imageResolutionQuery) {
 
 }

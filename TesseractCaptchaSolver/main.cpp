@@ -4,19 +4,22 @@
 int main()
 {
     auto builder{ AlgorithmChainBuilder{} };
-    std::unique_ptr<std::set<std::unique_ptr<Algorithm>, AlgorithmCompare>> chainInfo;
+    std::unique_ptr<Algorithm> chain;
 
     int totalCount = 0;
     do {
-        chainInfo = builder.returnNextChain();
-        if (chainInfo == nullptr)
+        chain = builder.returnNextChain();
+        if (chain == nullptr)
             break;
 
         std::cout << "Debugging ID: " << totalCount << std::endl;
-        for(auto& algo : *chainInfo)
+        const Algorithm* current = chain.get();
+        while (current != nullptr)
         {
-            algo->printDebugAlgorithm();
+            current->printDebugAlgorithm();
+            current = (current->successor).get();
         }
+
         std::cout << "---------" << std::endl;
         totalCount++;
     } while (true);

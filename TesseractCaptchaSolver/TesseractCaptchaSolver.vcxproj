@@ -131,7 +131,10 @@
     <ClCompile Include="Algorithm.cpp" />
     <ClCompile Include="Configuration.cpp" />
     <ClCompile Include="ContrastAlgorithm.cpp" />
+    <ClCompile Include="ImageResolutionQuery.cpp" />
+    <ClCompile Include="TesseractScannerAlgorithm.cpp" />
     <ClCompile Include="GreyscaleAlgorithm.cpp" />
+    <ClCompile Include="ImageReaderAlgorithm.cpp" />
     <ClCompile Include="IslandRemovalAlgorithm.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -142,7 +145,10 @@
     <ClInclude Include="AlgorithmsParameterEnum.hpp" />
     <ClInclude Include="Configuration.hpp" />
     <ClInclude Include="ContrastAlgorithm.hpp" />
+    <ClInclude Include="ImageResolutionQuery.hpp" />
+    <ClInclude Include="TesseractScannerAlgorithm.hpp" />
     <ClInclude Include="GreyscaleAlgorithm.hpp" />
+    <ClInclude Include="ImageReaderAlgorithm.hpp" />
     <ClInclude Include="IslandRemovalAlgorithm.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

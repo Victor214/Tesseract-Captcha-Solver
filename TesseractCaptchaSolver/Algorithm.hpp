@@ -7,19 +7,22 @@
 
 #include "AlgorithmsEnum.hpp"
 #include "AlgorithmsParameterEnum.hpp"
+#include "ImageResolutionQuery.hpp"
 
 class Algorithm
 {
 	public:
 		Algorithm(AlgorithmsEnum algoEnum);
-		int getTotalParameterCombinationAmount();
-		void writeParameters(int currentParamCount);
-		void printDebugAlgorithm();
-		virtual void process() = 0;
-		
-		AlgorithmsEnum getAlgorithmEnum();
+		void static addToHead(std::unique_ptr<Algorithm>& currentHead, std::unique_ptr<Algorithm>& algo);
+		void static addToTail(std::unique_ptr<Algorithm>& currentHead, std::unique_ptr<Algorithm>& algo);
 
-		static bool algorithmCompare(std::unique_ptr<Algorithm> a, std::unique_ptr<Algorithm> b);
+		int getTotalParameterCombinationAmount() const;
+		void writeParameters(int currentParamCount);
+		void printDebugAlgorithm() const;
+		virtual void process(ImageResolutionQuery& imageResolutionQuery) = 0;
+		AlgorithmsEnum getAlgorithmEnum() const;
+
+		std::unique_ptr<Algorithm> successor;
 
 	protected:
 		void setAlgorithmEnum(AlgorithmsEnum algorithmEnum);

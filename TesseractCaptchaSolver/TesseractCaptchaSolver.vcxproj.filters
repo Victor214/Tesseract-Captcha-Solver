@@ -39,7 +39,16 @@
     <ClCompile Include="ContrastAlgorithm.cpp">
       <Filter>Source Files\Algorithms</Filter>
     </ClCompile>
+    <ClCompile Include="ImageReaderAlgorithm.cpp">
+      <Filter>Source Files\Algorithms</Filter>
+    </ClCompile>
     <ClCompile Include="IslandRemovalAlgorithm.cpp">
+      <Filter>Source Files\Algorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="TesseractScannerAlgorithm.cpp">
+      <Filter>Source Files\Algorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageResolutionQuery.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -65,7 +74,16 @@
     <ClInclude Include="ContrastAlgorithm.hpp">
       <Filter>Header Files\Algorithms</Filter>
     </ClInclude>
+    <ClInclude Include="ImageReaderAlgorithm.hpp">
+      <Filter>Header Files\Algorithms</Filter>
+    </ClInclude>
     <ClInclude Include="IslandRemovalAlgorithm.hpp">
+      <Filter>Header Files\Algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="TesseractScannerAlgorithm.hpp">
+      <Filter>Header Files\Algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageResolutionQuery.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

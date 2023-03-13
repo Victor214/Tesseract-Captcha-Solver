@@ -6,7 +6,7 @@
 class ContrastAlgorithm : public Algorithm {
 	public:
 		ContrastAlgorithm();
-		virtual void process() override;
+		virtual void process(ImageResolutionQuery& imageResolutionQuery) override;
 
 	private:
 		void insertMaxParameterConfiguration();

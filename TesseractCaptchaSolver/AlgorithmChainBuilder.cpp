@@ -11,6 +11,8 @@
 #include "GreyscaleAlgorithm.hpp"
 #include "ContrastAlgorithm.hpp"
 #include "IslandRemovalAlgorithm.hpp"
+#include "ImageReaderAlgorithm.hpp"
+#include "TesseractScannerAlgorithm.hpp"
 
 AlgorithmChainBuilder::AlgorithmChainBuilder() 
 	: nextId{1} {
@@ -52,16 +54,18 @@ bool AlgorithmChainBuilder::hasCurrentChain() { // Verifies if it has more varia
 }
 
 
-bool AlgorithmChainBuilder::hasMoreParameterCombinations(std::set<std::unique_ptr<Algorithm>, AlgorithmCompare>& algos) { // Verifies if has more parameter combinations, or if all parameter combinations have been exhausted for the current combination of algorithms.
-	std::set<std::unique_ptr<Algorithm>>::iterator algoIt;
-	for (algoIt = algos.begin(); algoIt != algos.end(); ++algoIt) {
-		if (!isAlgorithmParameterCounterMaxed(**algoIt))
+bool AlgorithmChainBuilder::hasMoreParameterCombinations(const Algorithm& chain) { // Verifies if has more parameter combinations, or if all parameter combinations have been exhausted for the current combination of algorithms.
+	const Algorithm* current = &chain;
+	while (current != nullptr)
+	{
+		if (!isAlgorithmParameterCounterMaxed(*current))
 			return true;
+		current = (current->successor).get();
 	}
 	return false;
 }
 
-bool AlgorithmChainBuilder::isAlgorithmParameterCounterMaxed(Algorithm& algo) {
+bool AlgorithmChainBuilder::isAlgorithmParameterCounterMaxed(const Algorithm& algo) {
 	AlgorithmsEnum algoEnum = algo.getAlgorithmEnum();
 	int maxParamAmount = algo.getTotalParameterCombinationAmount();
 	if (this->currentParameterCount[algoEnum] < maxParamAmount - 1) // If current algorithm total parameter combinations is below the max amount.
@@ -69,52 +73,68 @@ bool AlgorithmChainBuilder::isAlgorithmParameterCounterMaxed(Algorithm& algo) {
 	return true;
 }
 
-void AlgorithmChainBuilder::incrementParameterCounters(std::set<std::unique_ptr<Algorithm>, AlgorithmCompare>& algos) {
-	std::set<std::unique_ptr<Algorithm>>::iterator algoIt;
-	for (algoIt = algos.begin(); algoIt != algos.end(); ++algoIt) {
-		AlgorithmsEnum algoEnum = (*algoIt)->getAlgorithmEnum();
-		if (!isAlgorithmParameterCounterMaxed(**algoIt)) {
+void AlgorithmChainBuilder::incrementParameterCounters(Algorithm& chain) {
+	const Algorithm* current = &chain;
+	while (current != nullptr)
+	{
+		AlgorithmsEnum algoEnum = current->getAlgorithmEnum();
+		if (!isAlgorithmParameterCounterMaxed(*current)) {
 			currentParameterCount[algoEnum]++;
 			return;
 		}
 
 		currentParameterCount[algoEnum] = 0; // If it reached here, means the total parameter count for the current algo can't be incremented, so zero this and follow to the next one.
+		current = (current->successor).get();
 	}
 }
 
-std::unique_ptr<std::set<std::unique_ptr<Algorithm>, AlgorithmCompare>> AlgorithmChainBuilder::getCombinationFromId(int id) {
-	auto algorithms = std::make_unique<std::set<std::unique_ptr<Algorithm>, AlgorithmCompare>>();
-	for (int i = 0; i < Configuration::algorithmsPool.size(); i++) {
+std::unique_ptr<Algorithm> AlgorithmChainBuilder::getCombinationFromId(int id) {
+	std::unique_ptr<Algorithm> prev = nullptr;
+	for (int i = Configuration::algorithmsPool.size()-1; i >= 0; i--) {
 		auto algoEnum = Configuration::algorithmsPool[i];
 		bool shouldPickAlgo = ((id >> i) & 1) == 1;
 		if (shouldPickAlgo) {
-			algorithms->emplace(
-				getAlgorithmFromEnum(algoEnum));
+			std::unique_ptr<Algorithm> current = getAlgorithmFromEnum(algoEnum);
+			Algorithm::addToHead(prev, current); // Prev is now the new head
 		}
 	}
-	return algorithms;
+
+	return prev;
 }
 
-void AlgorithmChainBuilder::adjustAlgorithmParameters(std::set<std::unique_ptr<Algorithm>, AlgorithmCompare>& algos) {
-	for(auto &algo : algos)
+void AlgorithmChainBuilder::adjustAlgorithmParameters(Algorithm& chain) {
+	Algorithm* current = &chain;
+	while (current != nullptr)
 	{
-		auto algoEnum = algo->getAlgorithmEnum();
-		algo->writeParameters(currentParameterCount[algoEnum]);
+		auto algoEnum = current->getAlgorithmEnum();
+		current->writeParameters(currentParameterCount[algoEnum]);
+		current = (current->successor).get();
 	}
 }
 
-std::unique_ptr<std::set<std::unique_ptr<Algorithm>, AlgorithmCompare>> AlgorithmChainBuilder::returnNextChain() {
+// Adds core algorithms which are invariant, are not related to image processing, and are always required for the chain to properly work.
+void AlgorithmChainBuilder::addCoreAlgorithms(std::unique_ptr<Algorithm>& chain) {
+	std::unique_ptr<Algorithm> imageReader = std::make_unique<ImageReaderAlgorithm>();
+	Algorithm::addToHead(chain, imageReader);
+
+	std::unique_ptr<Algorithm> tesseractScanner = std::make_unique<TesseractScannerAlgorithm>();
+	Algorithm::addToTail(chain, tesseractScanner);
+}
+
+std::unique_ptr<Algorithm> AlgorithmChainBuilder::returnNextChain() {
 	if (!hasCurrentChain())
 		return nullptr;
 
-	std::unique_ptr<std::set<std::unique_ptr<Algorithm>, AlgorithmCompare>> algos = getCombinationFromId(nextId);
-	adjustAlgorithmParameters(*algos);
-	if (!hasMoreParameterCombinations(*algos)) {
+	std::unique_ptr<Algorithm> chain = getCombinationFromId(nextId);
+
+	adjustAlgorithmParameters(*chain);
+	if (!hasMoreParameterCombinations(*chain)) {
 		nextId++;
 		resetParameterCounters();
 	} else {
-		incrementParameterCounters(*algos);
+		incrementParameterCounters(*chain);
 	}
-
-	return algos;
+	
+	addCoreAlgorithms(chain);
+	return chain;
 }

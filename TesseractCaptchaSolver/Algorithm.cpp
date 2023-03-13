@@ -2,14 +2,29 @@
 #include "AlgorithmsParameterEnum.hpp"
 
 Algorithm::Algorithm(AlgorithmsEnum algoEnum)
-	:algorithmEnum{ algoEnum } {
+	:algorithmEnum{ algoEnum }, successor{nullptr} {
 
 }
 
-int Algorithm::getTotalParameterCombinationAmount() {
+void Algorithm::addToHead(std::unique_ptr<Algorithm>& currentHead, std::unique_ptr<Algorithm>& algo) {
+	algo->successor = std::move(currentHead);
+	currentHead = std::move(algo);
+}
+
+void Algorithm::addToTail(std::unique_ptr<Algorithm>& currentHead, std::unique_ptr<Algorithm>& algo) {
+	Algorithm* current = currentHead.get();
+	while (current->successor != nullptr) {
+		current = current->successor.get();
+	}
+
+	// Current is now last element of linked list
+	current->successor = std::move(algo);
+}
+
+int Algorithm::getTotalParameterCombinationAmount() const {
 	int total = 1;
-	std::map<AlgorithmsParameterEnum, int>::iterator it;
-	for (it = maxParameters.begin(); it != maxParameters.end(); ++it) {
+	std::map<AlgorithmsParameterEnum, int>::const_iterator it;
+	for (it = maxParameters.cbegin(); it != maxParameters.cend(); ++it) {
 		total *= it->second;
 	}
 	return total;
@@ -26,7 +41,7 @@ void Algorithm::writeParameters(int currentParamCount) {
 	}
 }
 
-void Algorithm::printDebugAlgorithm() {
+void Algorithm::printDebugAlgorithm() const {
 	std::cout << algorithmEnum << ": ";
 	for (auto param : parameters) {
 		std::cout << "[" << param.first << ", " << param.second << "] ";
@@ -39,7 +54,7 @@ static bool algorithmCompare(const std::unique_ptr<Algorithm>& a, const std::uni
 }
 
 // Gets & Sets
-AlgorithmsEnum Algorithm::getAlgorithmEnum() {
+AlgorithmsEnum Algorithm::getAlgorithmEnum() const {
 	return this->algorithmEnum;
 }
 

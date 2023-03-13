@@ -1,11 +1,11 @@
-#ifndef ISLAND_REMOVAL_ALGORITHM_HPP
-#define ISLAND_REMOVAL_ALGORITHM_HPP
+#ifndef TESSERACT_SCANNER_ALGORITHM_HPP
+#define TESSERACT_SCANNER_ALGORITHM_HPP
 
 #include "Algorithm.hpp"
 
-class IslandRemovalAlgorithm : public Algorithm {
+class TesseractScannerAlgorithm : public Algorithm {
 public:
-	IslandRemovalAlgorithm();
+	TesseractScannerAlgorithm();
 	virtual void process(ImageResolutionQuery& imageResolutionQuery) override;
 
 private:
