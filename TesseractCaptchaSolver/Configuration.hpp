@@ -8,6 +8,7 @@ class Configuration
 {
 	public:
 		const static std::vector<AlgorithmsEnum> algorithmsPool;
+		const static int isDebugEnabled;
+		
 };
-
 #endif

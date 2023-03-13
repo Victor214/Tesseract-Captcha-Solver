@@ -10,5 +10,5 @@ void GreyscaleAlgorithm::insertMaxParameterConfiguration() {
 }
 
 void GreyscaleAlgorithm::process(ImageResolutionQuery& imageResolutionQuery) {
-
+	Algorithm::process(imageResolutionQuery);
 }

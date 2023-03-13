@@ -1,5 +1,6 @@
 #include "Algorithm.hpp"
 #include "AlgorithmsParameterEnum.hpp"
+#include "Configuration.hpp"
 
 Algorithm::Algorithm(AlgorithmsEnum algoEnum)
 	:algorithmEnum{ algoEnum }, successor{nullptr} {
@@ -51,6 +52,14 @@ void Algorithm::printDebugAlgorithm() const {
 
 static bool algorithmCompare(const std::unique_ptr<Algorithm>& a, const std::unique_ptr<Algorithm>& b) {
 	return a->getAlgorithmEnum() < b->getAlgorithmEnum();
+}
+
+void Algorithm::process(ImageResolutionQuery& imageResolutionQuery) {
+	if (Configuration::isDebugEnabled)
+		printDebugAlgorithm();
+
+	if (successor != nullptr)
+		successor->process(imageResolutionQuery);
 }
 
 // Gets & Sets

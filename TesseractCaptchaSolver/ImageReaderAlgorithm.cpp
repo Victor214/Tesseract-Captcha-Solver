@@ -10,5 +10,5 @@ void ImageReaderAlgorithm::insertMaxParameterConfiguration() {
 }
 
 void ImageReaderAlgorithm::process(ImageResolutionQuery& imageResolutionQuery) {
-
+	Algorithm::process(imageResolutionQuery);
 }

@@ -12,19 +12,19 @@
 class Algorithm
 {
 	public:
-		Algorithm(AlgorithmsEnum algoEnum);
 		void static addToHead(std::unique_ptr<Algorithm>& currentHead, std::unique_ptr<Algorithm>& algo);
 		void static addToTail(std::unique_ptr<Algorithm>& currentHead, std::unique_ptr<Algorithm>& algo);
 
 		int getTotalParameterCombinationAmount() const;
 		void writeParameters(int currentParamCount);
-		void printDebugAlgorithm() const;
-		virtual void process(ImageResolutionQuery& imageResolutionQuery) = 0;
+		virtual void printDebugAlgorithm() const;
+		virtual void process(ImageResolutionQuery& imageResolutionQuery);
 		AlgorithmsEnum getAlgorithmEnum() const;
 
 		std::unique_ptr<Algorithm> successor;
 
 	protected:
+		Algorithm(AlgorithmsEnum algoEnum);
 		void setAlgorithmEnum(AlgorithmsEnum algorithmEnum);
 		std::map<AlgorithmsParameterEnum, int> maxParameters;
 

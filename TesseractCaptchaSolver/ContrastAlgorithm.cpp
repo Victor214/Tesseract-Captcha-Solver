@@ -10,5 +10,5 @@ void ContrastAlgorithm::insertMaxParameterConfiguration() {
 }
 
 void ContrastAlgorithm::process(ImageResolutionQuery& imageResolutionQuery) {
-
+	Algorithm::process(imageResolutionQuery);
 }

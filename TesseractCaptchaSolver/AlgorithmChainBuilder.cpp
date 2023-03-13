@@ -90,7 +90,7 @@ void AlgorithmChainBuilder::incrementParameterCounters(Algorithm& chain) {
 
 std::unique_ptr<Algorithm> AlgorithmChainBuilder::getCombinationFromId(int id) {
 	std::unique_ptr<Algorithm> prev = nullptr;
-	for (int i = Configuration::algorithmsPool.size()-1; i >= 0; i--) {
+	for (int i = Configuration::algorithmsPool.size() - 1; i >= 0; i--) {
 		auto algoEnum = Configuration::algorithmsPool[i];
 		bool shouldPickAlgo = ((id >> i) & 1) == 1;
 		if (shouldPickAlgo) {

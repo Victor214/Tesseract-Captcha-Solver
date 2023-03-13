@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Algorithm.hpp"
 #include "AlgorithmChainBuilder.hpp"
 
 int main()
@@ -13,12 +14,15 @@ int main()
             break;
 
         std::cout << "Debugging ID: " << totalCount << std::endl;
-        const Algorithm* current = chain.get();
-        while (current != nullptr)
-        {
-            current->printDebugAlgorithm();
-            current = (current->successor).get();
-        }
+        std::unique_ptr<ImageResolutionQuery> imageQuery = std::make_unique<ImageResolutionQuery>("image/2KX7.png");
+        chain->process(*imageQuery);
+        //Algorithm* current = chain.get();
+        //while (current != nullptr)
+        //{
+        //    current->process();
+        //    current->printDebugAlgorithm();
+        //    current = (current->successor).get();
+        //}
 
         std::cout << "---------" << std::endl;
         totalCount++;

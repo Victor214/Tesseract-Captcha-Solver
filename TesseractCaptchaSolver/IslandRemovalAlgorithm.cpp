@@ -11,5 +11,5 @@ void IslandRemovalAlgorithm::insertMaxParameterConfiguration() {
 }
 
 void IslandRemovalAlgorithm::process(ImageResolutionQuery& imageResolutionQuery) {
-
+	Algorithm::process(imageResolutionQuery);
 }
