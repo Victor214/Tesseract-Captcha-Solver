@@ -51,6 +51,9 @@
     <ClCompile Include="ImageResolutionQuery.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ThresholdAlgorithm.cpp">
+      <Filter>Source Files\Algorithms</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AlgorithmsEnum.hpp">
@@ -85,6 +88,9 @@
     </ClInclude>
     <ClInclude Include="ImageResolutionQuery.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ThresholdAlgorithm.hpp">
+      <Filter>Header Files\Algorithms</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

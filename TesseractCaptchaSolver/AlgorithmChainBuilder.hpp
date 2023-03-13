@@ -13,7 +13,7 @@ class AlgorithmChainBuilder
 		std::unique_ptr<Algorithm> returnNextChain();
 
 	private:
-		void resetParameterCounters();
+		void iterateNextCombination();
 		std::unique_ptr<Algorithm> getAlgorithmFromEnum(AlgorithmsEnum algorithmEnum);
 		bool hasCurrentChain();
 		bool hasMoreParameterCombinations(const Algorithm& chain);
@@ -22,6 +22,8 @@ class AlgorithmChainBuilder
 		std::unique_ptr<Algorithm> getCombinationFromId(int id);
 		void adjustAlgorithmParameters(Algorithm& chain);
 		void addCoreAlgorithms(std::unique_ptr<Algorithm>& chain);
+		bool isValidCombination(const Algorithm& chain);
+		std::unique_ptr<Algorithm> getNextValidCombination();
 
 		int nextId;
 		std::map<AlgorithmsEnum, int> currentParameterCount;

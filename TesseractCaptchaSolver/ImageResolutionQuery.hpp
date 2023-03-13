@@ -8,8 +8,15 @@
 class ImageResolutionQuery
 {
 	public:
-		std::unique_ptr<cv::Mat> image;
 		ImageResolutionQuery(std::string path);
+		bool isCorrectSolution();
+		void loadImage();
+
+		std::string path;
+		std::unique_ptr<cv::Mat> image;
+
+		std::string captchaSolution;
+		std::string captchaProposedSolution;
 };
 
 #endif

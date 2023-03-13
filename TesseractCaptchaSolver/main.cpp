@@ -16,13 +16,6 @@ int main()
         std::cout << "Debugging ID: " << totalCount << std::endl;
         std::unique_ptr<ImageResolutionQuery> imageQuery = std::make_unique<ImageResolutionQuery>("image/2KX7.png");
         chain->process(*imageQuery);
-        //Algorithm* current = chain.get();
-        //while (current != nullptr)
-        //{
-        //    current->process();
-        //    current->printDebugAlgorithm();
-        //    current = (current->successor).get();
-        //}
 
         std::cout << "---------" << std::endl;
         totalCount++;

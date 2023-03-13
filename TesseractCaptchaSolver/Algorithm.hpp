@@ -26,11 +26,11 @@ class Algorithm
 	protected:
 		Algorithm(AlgorithmsEnum algoEnum);
 		void setAlgorithmEnum(AlgorithmsEnum algorithmEnum);
+		std::map<AlgorithmsParameterEnum, int> parameters;
 		std::map<AlgorithmsParameterEnum, int> maxParameters;
 
 	private:
 		AlgorithmsEnum algorithmEnum;
-		std::map<AlgorithmsParameterEnum, int> parameters;
 };
 
 struct AlgorithmCompare {

@@ -1,3 +1,4 @@
+#include "Algorithm.hpp"
 #include "ImageReaderAlgorithm.hpp"
 
 ImageReaderAlgorithm::ImageReaderAlgorithm()
@@ -10,5 +11,6 @@ void ImageReaderAlgorithm::insertMaxParameterConfiguration() {
 }
 
 void ImageReaderAlgorithm::process(ImageResolutionQuery& imageResolutionQuery) {
+	imageResolutionQuery.loadImage();
 	Algorithm::process(imageResolutionQuery);
 }

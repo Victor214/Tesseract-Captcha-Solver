@@ -3,9 +3,14 @@
 
 enum class AlgorithmsParameterEnum
 {
-    CONTRASTLEVEL = 0,
+    // Threshold
+    THRESHOLDVALUE = 0,
+
+    // Contrast
+    CONTRASTLEVEL,
+
+    // Island Removal
     ISLANDREMOVALTHRESHOLD,
-    ISLANDREMOVALTYPE
 };
 
 inline std::ostream& operator<<(std::ostream& out, const AlgorithmsParameterEnum value) {
@@ -13,9 +18,9 @@ inline std::ostream& operator<<(std::ostream& out, const AlgorithmsParameterEnum
 
 #define PROCESS_VAL(p) case(p): s = #p; break;
     switch (value) {
+        PROCESS_VAL(AlgorithmsParameterEnum::THRESHOLDVALUE);
         PROCESS_VAL(AlgorithmsParameterEnum::CONTRASTLEVEL);
         PROCESS_VAL(AlgorithmsParameterEnum::ISLANDREMOVALTHRESHOLD);
-        PROCESS_VAL(AlgorithmsParameterEnum::ISLANDREMOVALTYPE);
     }
 #undef PROCESS_VAL
 

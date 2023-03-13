@@ -2,6 +2,7 @@
 #include <stdexcept>
 #include <vector>
 #include <cmath>
+#include <unordered_set>
 #include <set>
 
 #include "Configuration.hpp"
@@ -9,6 +10,7 @@
 #include "AlgorithmsParameterEnum.hpp"
 
 #include "GreyscaleAlgorithm.hpp"
+#include "ThresholdAlgorithm.hpp"
 #include "ContrastAlgorithm.hpp"
 #include "IslandRemovalAlgorithm.hpp"
 #include "ImageReaderAlgorithm.hpp"
@@ -22,7 +24,11 @@ AlgorithmChainBuilder::AlgorithmChainBuilder()
 	}
 }
 
-void AlgorithmChainBuilder::resetParameterCounters() {
+void AlgorithmChainBuilder::iterateNextCombination() {
+	// Increment nextId, so a chain with different algorithms is generated
+	nextId++;
+
+	// Reset Parameter Counters
 	std::map<AlgorithmsEnum, int>::iterator currParamIt;
 	for (currParamIt = currentParameterCount.begin(); currParamIt != currentParameterCount.end(); ++currParamIt) {
 		currParamIt->second = 0;
@@ -34,6 +40,9 @@ std::unique_ptr<Algorithm> AlgorithmChainBuilder::getAlgorithmFromEnum(Algorithm
 	{
 		case AlgorithmsEnum::GREYSCALE:
 			return std::make_unique<GreyscaleAlgorithm>();
+
+		case AlgorithmsEnum::THRESHOLD:
+			return std::make_unique<ThresholdAlgorithm>();
 
 		case AlgorithmsEnum::ISLANDREMOVAL:
 			return std::make_unique<IslandRemovalAlgorithm>();
@@ -121,16 +130,46 @@ void AlgorithmChainBuilder::addCoreAlgorithms(std::unique_ptr<Algorithm>& chain)
 	Algorithm::addToTail(chain, tesseractScanner);
 }
 
-std::unique_ptr<Algorithm> AlgorithmChainBuilder::returnNextChain() {
-	if (!hasCurrentChain())
-		return nullptr;
+bool AlgorithmChainBuilder::isValidCombination(const Algorithm& chain) {
+	// Convert current algorithms into a set for easy lookup
+	std::unordered_set<AlgorithmsEnum> algorithmsInChain;
+	const Algorithm* current = &chain;
+	while (current != nullptr)
+	{
+		algorithmsInChain.emplace(current->getAlgorithmEnum());
+		current = (current->successor).get();
+	}
 
-	std::unique_ptr<Algorithm> chain = getCombinationFromId(nextId);
+	// Check for dependency rules
+	for (auto dependency : Configuration::algorithmDependencyList) {
+		if (algorithmsInChain.count(dependency.first) && !algorithmsInChain.count(dependency.second)) // Contains first, but not second
+			return false;
+	}
+	return true;
+}
+
+std::unique_ptr<Algorithm> AlgorithmChainBuilder::getNextValidCombination() {
+	do {
+		if (!hasCurrentChain())
+			return nullptr;
+
+		std::unique_ptr<Algorithm> chain = getCombinationFromId(nextId); // We know for sure this exists, but still need to make sure it is valid.
+		if (isValidCombination(*chain))
+			return chain;
+
+		iterateNextCombination();
+	} while (true);
+}
+
+std::unique_ptr<Algorithm> AlgorithmChainBuilder::returnNextChain() {
+	std::unique_ptr<Algorithm> chain = getNextValidCombination();
+	if (!chain) {
+		return nullptr;
+	}
 
 	adjustAlgorithmParameters(*chain);
 	if (!hasMoreParameterCombinations(*chain)) {
-		nextId++;
-		resetParameterCounters();
+		iterateNextCombination();
 	} else {
 		incrementParameterCounters(*chain);
 	}
