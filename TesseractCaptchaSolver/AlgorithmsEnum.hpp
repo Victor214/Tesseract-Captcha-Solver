@@ -11,11 +11,12 @@ enum class AlgorithmsEnum
     GREYSCALE,
     THRESHOLD,
     ISLANDREMOVAL,
+    MEDIANFILTER,
     TESSERACTSCANNER,
 };
 
 inline std::ostream& operator<<(std::ostream& out, const AlgorithmsEnum value) {
-    std::string s = "";
+    std::string s{ "" };
 
 #define PROCESS_VAL(p) case(p): s = #p; break;
     switch (value) {
@@ -24,11 +25,12 @@ inline std::ostream& operator<<(std::ostream& out, const AlgorithmsEnum value) {
         PROCESS_VAL(AlgorithmsEnum::GREYSCALE);
         PROCESS_VAL(AlgorithmsEnum::THRESHOLD);
         PROCESS_VAL(AlgorithmsEnum::ISLANDREMOVAL);
+        PROCESS_VAL(AlgorithmsEnum::MEDIANFILTER);
         PROCESS_VAL(AlgorithmsEnum::TESSERACTSCANNER);
     }
 #undef PROCESS_VAL
 
-    std::string remove = "AlgorithmsEnum::";
+    std::string remove{ "AlgorithmsEnum::" };
     int pos = s.find(remove);
     s.erase(pos, remove.size());
     return out << s;

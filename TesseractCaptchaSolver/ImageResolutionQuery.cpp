@@ -3,7 +3,15 @@
 
 ImageResolutionQuery::ImageResolutionQuery(std::string path)
 	:path{path} {
+	// Load captcha solution from name
+	std::string name{ path };
+	std::string remove{ "image/" };
+	int pos{ static_cast<int>(name.find(remove)) };
+	name.erase(pos, remove.size());
 
+	pos = name.find(".");
+	name.erase(pos); // Remove file extension
+	this->captchaSolution = name;
 }
 
 void ImageResolutionQuery::loadImage() {

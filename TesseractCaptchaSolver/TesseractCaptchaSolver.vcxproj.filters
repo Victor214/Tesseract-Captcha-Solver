@@ -51,6 +51,9 @@
     <ClCompile Include="ThresholdAlgorithm.cpp">
       <Filter>Source Files\Algorithms</Filter>
     </ClCompile>
+    <ClCompile Include="MedianFilterAlgorithm.cpp">
+      <Filter>Source Files\Algorithms</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AlgorithmsEnum.hpp">
@@ -84,6 +87,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ThresholdAlgorithm.hpp">
+      <Filter>Header Files\Algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="MedianFilterAlgorithm.hpp">
       <Filter>Header Files\Algorithms</Filter>
     </ClInclude>
   </ItemGroup>

@@ -6,5 +6,7 @@ TesseractScannerAlgorithm::TesseractScannerAlgorithm()
 }
 
 void TesseractScannerAlgorithm::process(ImageResolutionQuery& imageResolutionQuery) {
+
+
 	Algorithm::process(imageResolutionQuery);
 }

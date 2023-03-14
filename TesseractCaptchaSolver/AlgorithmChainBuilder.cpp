@@ -9,10 +9,11 @@
 #include "AlgorithmChainBuilder.hpp"
 #include "AlgorithmsParameterEnum.hpp"
 
+#include "ImageReaderAlgorithm.hpp"
 #include "GreyscaleAlgorithm.hpp"
 #include "ThresholdAlgorithm.hpp"
 #include "IslandRemovalAlgorithm.hpp"
-#include "ImageReaderAlgorithm.hpp"
+#include "MedianFilterAlgorithm.hpp"
 #include "TesseractScannerAlgorithm.hpp"
 
 AlgorithmChainBuilder::AlgorithmChainBuilder() 
@@ -45,6 +46,9 @@ std::unique_ptr<Algorithm> AlgorithmChainBuilder::getAlgorithmFromEnum(Algorithm
 
 		case AlgorithmsEnum::ISLANDREMOVAL:
 			return std::make_unique<IslandRemovalAlgorithm>();
+
+		case AlgorithmsEnum::MEDIANFILTER:
+			return std::make_unique<MedianFilterAlgorithm>();
 
 		default:
 			throw std::invalid_argument("This algorithm is not implemented yet, please pass a valid algorithm.");
