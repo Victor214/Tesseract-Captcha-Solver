@@ -130,7 +130,6 @@
     <ClCompile Include="AlgorithmChainBuilder.cpp" />
     <ClCompile Include="Algorithm.cpp" />
     <ClCompile Include="Configuration.cpp" />
-    <ClCompile Include="ContrastAlgorithm.cpp" />
     <ClCompile Include="ThresholdAlgorithm.cpp" />
     <ClCompile Include="ImageResolutionQuery.cpp" />
     <ClCompile Include="TesseractScannerAlgorithm.cpp" />
@@ -145,7 +144,6 @@
     <ClInclude Include="AlgorithmsEnum.hpp" />
     <ClInclude Include="AlgorithmsParameterEnum.hpp" />
     <ClInclude Include="Configuration.hpp" />
-    <ClInclude Include="ContrastAlgorithm.hpp" />
     <ClInclude Include="ThresholdAlgorithm.hpp" />
     <ClInclude Include="ImageResolutionQuery.hpp" />
     <ClInclude Include="TesseractScannerAlgorithm.hpp" />

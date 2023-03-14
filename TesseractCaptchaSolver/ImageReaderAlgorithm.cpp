@@ -6,10 +6,6 @@ ImageReaderAlgorithm::ImageReaderAlgorithm()
 	insertMaxParameterConfiguration();
 }
 
-void ImageReaderAlgorithm::insertMaxParameterConfiguration() {
-
-}
-
 void ImageReaderAlgorithm::process(ImageResolutionQuery& imageResolutionQuery) {
 	imageResolutionQuery.loadImage();
 	Algorithm::process(imageResolutionQuery);

@@ -36,9 +36,6 @@
     <ClCompile Include="GreyscaleAlgorithm.cpp">
       <Filter>Source Files\Algorithms</Filter>
     </ClCompile>
-    <ClCompile Include="ContrastAlgorithm.cpp">
-      <Filter>Source Files\Algorithms</Filter>
-    </ClCompile>
     <ClCompile Include="ImageReaderAlgorithm.cpp">
       <Filter>Source Files\Algorithms</Filter>
     </ClCompile>
@@ -72,9 +69,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GreyscaleAlgorithm.hpp">
-      <Filter>Header Files\Algorithms</Filter>
-    </ClInclude>
-    <ClInclude Include="ContrastAlgorithm.hpp">
       <Filter>Header Files\Algorithms</Filter>
     </ClInclude>
     <ClInclude Include="ImageReaderAlgorithm.hpp">

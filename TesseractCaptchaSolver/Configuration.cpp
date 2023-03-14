@@ -2,7 +2,7 @@
 #include <utility>
 
 const std::vector<AlgorithmsEnum> Configuration::algorithmsPool
-	{ AlgorithmsEnum::GREYSCALE, AlgorithmsEnum::THRESHOLD, AlgorithmsEnum::ISLANDREMOVAL, /*AlgorithmsEnum::CONTRAST,*/ };
+	{ AlgorithmsEnum::GREYSCALE, AlgorithmsEnum::THRESHOLD, AlgorithmsEnum::ISLANDREMOVAL};
 
 // Threshold depends on Greyscale (If threshold exists, but greyscale doesn't, then it is an invalid combination. However, if greyscale exists, but)
 const std::vector<std::pair<AlgorithmsEnum, AlgorithmsEnum>> Configuration::algorithmDependencyList = {

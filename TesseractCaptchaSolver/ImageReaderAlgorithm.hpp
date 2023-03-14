@@ -9,7 +9,9 @@ public:
 	virtual void process(ImageResolutionQuery& imageResolutionQuery) override;
 
 private:
-	void insertMaxParameterConfiguration();
+	void insertMaxParameterConfiguration() {
+
+	}
 };
 
 #endif

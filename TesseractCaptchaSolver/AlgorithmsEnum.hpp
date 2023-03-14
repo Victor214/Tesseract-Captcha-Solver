@@ -10,7 +10,6 @@ enum class AlgorithmsEnum
     IMAGEREADER,
     GREYSCALE,
     THRESHOLD,
-    CONTRAST,
     ISLANDREMOVAL,
     TESSERACTSCANNER,
 };
@@ -24,7 +23,6 @@ inline std::ostream& operator<<(std::ostream& out, const AlgorithmsEnum value) {
         PROCESS_VAL(AlgorithmsEnum::IMAGEREADER);
         PROCESS_VAL(AlgorithmsEnum::GREYSCALE);
         PROCESS_VAL(AlgorithmsEnum::THRESHOLD);
-        PROCESS_VAL(AlgorithmsEnum::CONTRAST);
         PROCESS_VAL(AlgorithmsEnum::ISLANDREMOVAL);
         PROCESS_VAL(AlgorithmsEnum::TESSERACTSCANNER);
     }

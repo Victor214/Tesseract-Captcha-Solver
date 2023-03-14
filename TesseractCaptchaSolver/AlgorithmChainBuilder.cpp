@@ -11,7 +11,6 @@
 
 #include "GreyscaleAlgorithm.hpp"
 #include "ThresholdAlgorithm.hpp"
-#include "ContrastAlgorithm.hpp"
 #include "IslandRemovalAlgorithm.hpp"
 #include "ImageReaderAlgorithm.hpp"
 #include "TesseractScannerAlgorithm.hpp"
@@ -46,9 +45,6 @@ std::unique_ptr<Algorithm> AlgorithmChainBuilder::getAlgorithmFromEnum(Algorithm
 
 		case AlgorithmsEnum::ISLANDREMOVAL:
 			return std::make_unique<IslandRemovalAlgorithm>();
-
-		case AlgorithmsEnum::CONTRAST:
-			return std::make_unique<ContrastAlgorithm>();
 
 		default:
 			throw std::invalid_argument("This algorithm is not implemented yet, please pass a valid algorithm.");

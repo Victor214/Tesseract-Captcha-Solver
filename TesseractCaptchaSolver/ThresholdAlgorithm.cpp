@@ -6,10 +6,6 @@ ThresholdAlgorithm::ThresholdAlgorithm()
 	insertMaxParameterConfiguration();
 }
 
-void ThresholdAlgorithm::insertMaxParameterConfiguration() {
-	this->maxParameters.emplace(AlgorithmsParameterEnum::THRESHOLDVALUE, 5);
-}
-
 void ThresholdAlgorithm::process(ImageResolutionQuery& imageResolutionQuery) {
 	//Apply threshold
 	cv::Mat& image = *(imageResolutionQuery.image);

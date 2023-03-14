@@ -6,10 +6,6 @@ GreyscaleAlgorithm::GreyscaleAlgorithm()
 	insertMaxParameterConfiguration();
 }
 
-void GreyscaleAlgorithm::insertMaxParameterConfiguration() {
-
-}
-
 void GreyscaleAlgorithm::process(ImageResolutionQuery& imageResolutionQuery) {
 	// Convert image to greyscale
 	cv::Mat& image = *(imageResolutionQuery.image);

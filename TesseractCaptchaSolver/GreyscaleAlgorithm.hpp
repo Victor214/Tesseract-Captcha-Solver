@@ -9,7 +9,9 @@ class GreyscaleAlgorithm : public Algorithm {
 		virtual void process(ImageResolutionQuery& imageResolutionQuery) override;
 
 	private:
-		void insertMaxParameterConfiguration();
+		void insertMaxParameterConfiguration() {
+
+		}
 };
 
 #endif

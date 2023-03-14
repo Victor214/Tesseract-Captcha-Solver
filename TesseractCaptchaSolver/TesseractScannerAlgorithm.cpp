@@ -5,10 +5,6 @@ TesseractScannerAlgorithm::TesseractScannerAlgorithm()
 	insertMaxParameterConfiguration();
 }
 
-void TesseractScannerAlgorithm::insertMaxParameterConfiguration() {
-
-}
-
 void TesseractScannerAlgorithm::process(ImageResolutionQuery& imageResolutionQuery) {
 	Algorithm::process(imageResolutionQuery);
 }
