@@ -12,3 +12,7 @@ const std::vector<std::pair<AlgorithmsEnum, AlgorithmsEnum>> Configuration::algo
 
 constexpr int Configuration::isDebugEnabled = 1;
 
+const std::string Configuration::tesseractPath = "C:/Program Files/Tesseract-OCR/tessdata";
+const std::string Configuration::tesseractCharPool = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+constexpr int Configuration::maxPrintAmount = 5;

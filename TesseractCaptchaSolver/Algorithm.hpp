@@ -20,6 +20,7 @@ class Algorithm
 		virtual void printDebugAlgorithm() const;
 		virtual void process(ImageResolutionQuery& imageResolutionQuery);
 		AlgorithmsEnum getAlgorithmEnum() const;
+		std::string getChainDescription();
 
 		std::unique_ptr<Algorithm> successor;
 
@@ -31,12 +32,6 @@ class Algorithm
 
 	private:
 		AlgorithmsEnum algorithmEnum;
-};
-
-struct AlgorithmCompare {
-	bool operator() (const std::unique_ptr<Algorithm>& a, const std::unique_ptr<Algorithm>& b) const {
-		return a->getAlgorithmEnum() < b->getAlgorithmEnum();
-	}
 };
 
 #endif

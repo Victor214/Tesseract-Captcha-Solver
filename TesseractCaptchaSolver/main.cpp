@@ -1,25 +1,25 @@
 #include <iostream>
 #include "Algorithm.hpp"
 #include "AlgorithmChainBuilder.hpp"
+#include "AlgorithmChainProcessor.hpp"
+#include "ChainProcessingResult.hpp"
 
 int main()
 {
-    auto builder{ AlgorithmChainBuilder{} };
+    AlgorithmChainBuilder builder{};
     std::unique_ptr<Algorithm> chain;
+    std::list<std::unique_ptr<ChainProcessingResult>> resultList;
 
-    int totalCount = 0;
     do {
         chain = builder.returnNextChain();
         if (chain == nullptr)
             break;
 
-        std::cout << "Debugging ID: " << totalCount << std::endl;
-        std::unique_ptr<ImageResolutionQuery> imageQuery = std::make_unique<ImageResolutionQuery>("image/2KX7.png");
-        chain->process(*imageQuery);
-
-        std::cout << "---------" << std::endl;
-        totalCount++;
+        AlgorithmChainProcessor processor{std::move(chain)};
+        std::unique_ptr<ChainProcessingResult> chainProcessingResult = processor.process();
+        resultList.push_back(std::move(chainProcessingResult));
     } while (true);
 
-    std::cout << "Total Count: " << totalCount << std::endl;
+    resultList.sort(ChainProcessingResult::resultOrderComparator);
+    ChainProcessingResult::printResult(resultList);
 }

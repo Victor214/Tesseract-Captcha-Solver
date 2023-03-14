@@ -62,6 +62,23 @@ void Algorithm::process(ImageResolutionQuery& imageResolutionQuery) {
 		successor->process(imageResolutionQuery);
 }
 
+std::string Algorithm::getChainDescription() {
+	std::stringstream description;
+	const Algorithm* current = this;
+	while (current != nullptr)
+	{
+		AlgorithmsEnum algoEnum = current->getAlgorithmEnum();
+		description << algoEnum << ":" << "\n";
+		for (auto param : current->parameters) {
+			description << "	* [" << param.first << ", " << param.second << "] \n";
+		}
+
+		current = (current->successor).get();
+	}
+
+	return description.str();
+}
+
 // Gets & Sets
 AlgorithmsEnum Algorithm::getAlgorithmEnum() const {
 	return this->algorithmEnum;

@@ -1,23 +1,16 @@
 #include <stdexcept>
 #include "ImageResolutionQuery.hpp"
 
-ImageResolutionQuery::ImageResolutionQuery(std::string path)
-	:path{path} {
-	// Load captcha solution from name
-	std::string name{ path };
-	std::string remove{ "image/" };
-	int pos{ static_cast<int>(name.find(remove)) };
-	name.erase(pos, remove.size());
+ImageResolutionQuery::ImageResolutionQuery(std::string captchaSolution)
+	:captchaSolution{ captchaSolution } {
 
-	pos = name.find(".");
-	name.erase(pos); // Remove file extension
-	this->captchaSolution = name;
 }
 
 void ImageResolutionQuery::loadImage() {
-	if (path.empty())
-		throw std::invalid_argument("Path is not valid");
+	if (captchaSolution.empty())
+		throw std::invalid_argument("Captcha name is not valid");
 
+	std::string path{ "image/" + captchaSolution + ".png" };
 	image = std::make_unique<cv::Mat>(cv::imread(path, cv::IMREAD_COLOR));
 }
 

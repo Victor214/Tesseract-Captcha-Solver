@@ -104,6 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -118,6 +119,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,8 +131,11 @@
   <ItemGroup>
     <ClCompile Include="AlgorithmChainBuilder.cpp" />
     <ClCompile Include="Algorithm.cpp" />
+    <ClCompile Include="AlgorithmChainProcessor.cpp" />
+    <ClCompile Include="ChainProcessingResult.cpp" />
     <ClCompile Include="Configuration.cpp" />
     <ClCompile Include="MedianFilterAlgorithm.cpp" />
+    <ClCompile Include="TesseractSingleton.cpp" />
     <ClCompile Include="ThresholdAlgorithm.cpp" />
     <ClCompile Include="ImageResolutionQuery.cpp" />
     <ClCompile Include="TesseractScannerAlgorithm.cpp" />
@@ -142,10 +147,13 @@
   <ItemGroup>
     <ClInclude Include="AlgorithmChainBuilder.hpp" />
     <ClInclude Include="Algorithm.hpp" />
+    <ClInclude Include="AlgorithmChainProcessor.hpp" />
     <ClInclude Include="AlgorithmsEnum.hpp" />
     <ClInclude Include="AlgorithmsParameterEnum.hpp" />
+    <ClInclude Include="ChainProcessingResult.hpp" />
     <ClInclude Include="Configuration.hpp" />
     <ClInclude Include="MedianFilterAlgorithm.hpp" />
+    <ClInclude Include="TesseractSingleton.hpp" />
     <ClInclude Include="ThresholdAlgorithm.hpp" />
     <ClInclude Include="ImageResolutionQuery.hpp" />
     <ClInclude Include="TesseractScannerAlgorithm.hpp" />
