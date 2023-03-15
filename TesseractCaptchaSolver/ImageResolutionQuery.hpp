@@ -8,7 +8,7 @@
 class ImageResolutionQuery
 {
 	public:
-		ImageResolutionQuery(std::string captchaSolution);
+		explicit ImageResolutionQuery(std::string captchaSolution);
 		void loadImage();
 		bool isCorrectSolution() const;
 		virtual ~ImageResolutionQuery() = default;

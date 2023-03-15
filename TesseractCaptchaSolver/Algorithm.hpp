@@ -25,7 +25,7 @@ class Algorithm
 		std::unique_ptr<Algorithm> successor;
 
 	protected:
-		Algorithm(AlgorithmsEnum algoEnum);
+		explicit Algorithm(AlgorithmsEnum algoEnum);
 		std::map<AlgorithmsParameterEnum, int> parameters;
 		std::map<AlgorithmsParameterEnum, int> maxParameters;
 
