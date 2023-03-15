@@ -14,7 +14,7 @@ void ImageResolutionQuery::loadImage() {
 	image = std::make_unique<cv::Mat>(cv::imread(path, cv::IMREAD_COLOR));
 }
 
-bool ImageResolutionQuery::isCorrectSolution() {
+bool ImageResolutionQuery::isCorrectSolution() const {
 	if (captchaSolution.empty() || captchaProposedSolution.empty())
 		throw std::invalid_argument("Provided captcha solutions are empty");
 

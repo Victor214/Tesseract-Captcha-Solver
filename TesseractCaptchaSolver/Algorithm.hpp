@@ -16,9 +16,9 @@ class Algorithm
 		void static addToTail(std::unique_ptr<Algorithm>& currentHead, std::unique_ptr<Algorithm>& algo);
 
 		int getTotalParameterCombinationAmount() const;
-		void writeParameters(int currentParamCount);
+		void writeParameters(const int currentParamCount);
 		AlgorithmsEnum getAlgorithmEnum() const;
-		std::string getChainDescription();
+		std::string getChainDescription() const;
 		virtual void process(ImageResolutionQuery& imageResolutionQuery);
 
 		std::unique_ptr<Algorithm> successor;
@@ -29,7 +29,7 @@ class Algorithm
 		std::map<AlgorithmsParameterEnum, int> maxParameters;
 
 	private:
-		AlgorithmsEnum algorithmEnum;
+		const AlgorithmsEnum algorithmEnum;
 };
 
 #endif

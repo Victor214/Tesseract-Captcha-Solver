@@ -30,7 +30,7 @@ int Algorithm::getTotalParameterCombinationAmount() const {
 	return total;
 }
 
-void Algorithm::writeParameters(int currentParamCount) {
+void Algorithm::writeParameters(const int currentParamCount) {
 	int divisor{ 1 };
 	for (auto const& maxParam : maxParameters) {
 		int maxParameterValue{ maxParam.second };
@@ -40,7 +40,7 @@ void Algorithm::writeParameters(int currentParamCount) {
 	}
 }
 
-std::string Algorithm::getChainDescription() {
+std::string Algorithm::getChainDescription() const {
 	std::stringstream description;
 	const Algorithm* current{ this };
 	while (current != nullptr)

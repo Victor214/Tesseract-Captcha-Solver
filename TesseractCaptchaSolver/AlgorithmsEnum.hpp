@@ -33,7 +33,7 @@ inline std::ostream& operator<<(std::ostream& out, const AlgorithmsEnum value) {
 #undef PROCESS_VAL
 
     std::string remove{ "AlgorithmsEnum::" };
-    int pos = s.find(remove);
+    int pos = s.find(remove) ;
     s.erase(pos, remove.size());
     return out << s;
 }

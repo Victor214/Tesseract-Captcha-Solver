@@ -19,14 +19,14 @@ AlgorithmChainBuilder::AlgorithmChainBuilder()
 	}
 }
 
-bool AlgorithmChainBuilder::hasCurrentChain() { // Verifies if it has more variations in algorithm sequences to be called, or if work has ended.
+bool AlgorithmChainBuilder::hasCurrentChain() const { // Verifies if it has more variations in algorithm sequences to be called, or if work has ended.
 	int maxChains{ static_cast<int>(pow(2, Configuration::algorithmsPool.size())) - 1 };
 	if (nextId > maxChains)
 		return false;
 	return true;
 }
 
-bool AlgorithmChainBuilder::hasMoreParameterCombinations(const Algorithm& chain) { // Verifies if has more parameter combinations, or if all parameter combinations have been exhausted for the current combination of algorithms.
+bool AlgorithmChainBuilder::hasMoreParameterCombinations(const Algorithm& chain) const { // Verifies if has more parameter combinations, or if all parameter combinations have been exhausted for the current combination of algorithms.
 	const Algorithm* current{ &chain };
 	while (current != nullptr)
 	{
@@ -37,10 +37,10 @@ bool AlgorithmChainBuilder::hasMoreParameterCombinations(const Algorithm& chain)
 	return false;
 }
 
-bool AlgorithmChainBuilder::isAlgorithmParameterCounterMaxed(const Algorithm& algo) {
+bool AlgorithmChainBuilder::isAlgorithmParameterCounterMaxed(const Algorithm& algo) const {
 	AlgorithmsEnum algoEnum{ algo.getAlgorithmEnum() };
 	int maxParamAmount{ algo.getTotalParameterCombinationAmount() };
-	if (this->currentParameterCount[algoEnum] < maxParamAmount - 1) // If current algorithm total parameter combinations is below the max amount.
+	if (this->currentParameterCount.at(algoEnum) < maxParamAmount - 1) // If current algorithm total parameter combinations is below the max amount.
 		return false;
 	return true;
 }
@@ -56,7 +56,7 @@ void AlgorithmChainBuilder::iterateNextCombination() {
 }
 
 
-void AlgorithmChainBuilder::incrementParameterCounters(Algorithm& chain) {
+void AlgorithmChainBuilder::incrementParameterCounters(const Algorithm& chain) {
 	const Algorithm* current{ &chain };
 	while (current != nullptr)
 	{
@@ -71,7 +71,7 @@ void AlgorithmChainBuilder::incrementParameterCounters(Algorithm& chain) {
 	}
 }
 
-std::unique_ptr<Algorithm> AlgorithmChainBuilder::getCombinationFromId(int id) {
+std::unique_ptr<Algorithm> AlgorithmChainBuilder::getCombinationFromId(const int id) {
 	std::unique_ptr<Algorithm> prev{ nullptr };
 	for (int i = Configuration::algorithmsPool.size() - 1; i >= 0; i--) {
 		AlgorithmsEnum algoEnum{ Configuration::algorithmsPool[i] };
@@ -95,7 +95,7 @@ void AlgorithmChainBuilder::adjustAlgorithmParameters(Algorithm& chain) {
 	}
 }
 
-bool AlgorithmChainBuilder::isValidCombination(const Algorithm& chain) {
+bool AlgorithmChainBuilder::isValidCombination(const Algorithm& chain) const {
 	// Convert current algorithms into a set for easy lookup
 	std::unordered_set<AlgorithmsEnum> algorithmsInChain;
 	const Algorithm* current{ &chain };

@@ -13,7 +13,7 @@ class AlgorithmFactory
 {
 	public:
 		AlgorithmFactory() = delete;
-		static std::unique_ptr<Algorithm> createAlgorithm(AlgorithmsEnum algoEnum);
+		static std::unique_ptr<Algorithm> createAlgorithm(const AlgorithmsEnum algoEnum);
 
 	private:
 		const static std::unordered_map<AlgorithmsEnum, AlgorithmFactoryLambda> factoryMap;

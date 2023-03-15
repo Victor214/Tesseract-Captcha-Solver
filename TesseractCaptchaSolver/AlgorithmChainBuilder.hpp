@@ -13,14 +13,14 @@ class AlgorithmChainBuilder
 		std::unique_ptr<Algorithm> returnNextChain();
 
 	private:
-		bool hasCurrentChain();
-		bool hasMoreParameterCombinations(const Algorithm& chain);
-		bool isAlgorithmParameterCounterMaxed(const Algorithm& algo);
+		bool hasCurrentChain() const;
+		bool hasMoreParameterCombinations(const Algorithm& chain) const;
+		bool isAlgorithmParameterCounterMaxed(const Algorithm& algo) const;
 		void iterateNextCombination();
-		void incrementParameterCounters(Algorithm& chain);
-		std::unique_ptr<Algorithm> getCombinationFromId(int id);
+		void incrementParameterCounters(const Algorithm& chain);
+		std::unique_ptr<Algorithm> getCombinationFromId(const int id);
 		void adjustAlgorithmParameters(Algorithm& chain);
-		bool isValidCombination(const Algorithm& chain);
+		bool isValidCombination(const Algorithm& chain) const;
 		std::unique_ptr<Algorithm> getNextValidCombination();
 		void addCoreAlgorithms(std::unique_ptr<Algorithm>& chain);
 

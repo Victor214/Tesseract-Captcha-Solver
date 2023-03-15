@@ -16,7 +16,7 @@ const std::unordered_map<AlgorithmsEnum, AlgorithmFactoryLambda> AlgorithmFactor
 	{ AlgorithmsEnum::TRIMWHITESPACE, [] { return std::make_unique<TrimWhitespaceAlgorithm>(); } },
 };
 
-std::unique_ptr<Algorithm> AlgorithmFactory::createAlgorithm(AlgorithmsEnum algoEnum) {
+std::unique_ptr<Algorithm> AlgorithmFactory::createAlgorithm(const AlgorithmsEnum algoEnum) {
 	if (factoryMap.find(algoEnum) == factoryMap.end())
 		throw std::invalid_argument("The given algorithm enum doesn't have a factory associated to it");
 	return factoryMap.at(algoEnum)();
