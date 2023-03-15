@@ -9,14 +9,6 @@ const std::vector<std::pair<AlgorithmsEnum, AlgorithmsEnum>> Configuration::algo
 	{std::make_pair(AlgorithmsEnum::THRESHOLD, AlgorithmsEnum::GREYSCALE)},
 	{std::make_pair(AlgorithmsEnum::ISLANDREMOVAL, AlgorithmsEnum::THRESHOLD)},
 	{std::make_pair(AlgorithmsEnum::TRIMWHITESPACE, AlgorithmsEnum::GREYSCALE)},
-
-	// Temp
-	//{std::make_pair(AlgorithmsEnum::MEDIANFILTER, AlgorithmsEnum::ISLANDREMOVAL)},
-	//{std::make_pair(AlgorithmsEnum::TRIMWHITESPACE, AlgorithmsEnum::MEDIANFILTER)},
-	//{std::make_pair(AlgorithmsEnum::GREYSCALE, AlgorithmsEnum::THRESHOLD)},
-	//{std::make_pair(AlgorithmsEnum::THRESHOLD, AlgorithmsEnum::ISLANDREMOVAL)},
-	//{std::make_pair(AlgorithmsEnum::ISLANDREMOVAL, AlgorithmsEnum::MEDIANFILTER)},
-	//{std::make_pair(AlgorithmsEnum::MEDIANFILTER, AlgorithmsEnum::TRIMWHITESPACE)},
 };
 
 constexpr int Configuration::isDebugEnabled{ 1 };
