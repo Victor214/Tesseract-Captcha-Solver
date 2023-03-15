@@ -19,9 +19,9 @@ const std::vector<std::pair<AlgorithmsEnum, AlgorithmsEnum>> Configuration::algo
 	//{std::make_pair(AlgorithmsEnum::MEDIANFILTER, AlgorithmsEnum::TRIMWHITESPACE)},
 };
 
-constexpr int Configuration::isDebugEnabled = 1;
+constexpr int Configuration::isDebugEnabled{ 1 };
 
-const std::string Configuration::tesseractPath = "C:/Program Files/Tesseract-OCR/tessdata";
-const std::string Configuration::tesseractCharPool = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+const std::string Configuration::tesseractPath{ "C:/Program Files/Tesseract-OCR/tessdata" };
+const std::string Configuration::tesseractCharPool{ "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789" };
 
-constexpr int Configuration::maxPrintAmount = 5;
+constexpr int Configuration::maxPrintAmount{ 5 };

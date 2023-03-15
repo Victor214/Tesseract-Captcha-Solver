@@ -9,9 +9,9 @@ TesseractScannerAlgorithm::TesseractScannerAlgorithm()
 }
 
 void TesseractScannerAlgorithm::process(ImageResolutionQuery& imageResolutionQuery) {
-    cv::Mat& image = *(imageResolutionQuery.image);
+	cv::Mat& image{ *(imageResolutionQuery.image) };
 
-	std::string result = TesseractSingleton::recognize(image);
+	std::string result{ TesseractSingleton::recognize(image) };
 	imageResolutionQuery.captchaProposedSolution = result;
 
 	if (Configuration::isDebugEnabled)

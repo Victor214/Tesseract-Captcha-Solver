@@ -10,7 +10,7 @@ ChainProcessingResult::ChainProcessingResult(double resultPercentage, std::strin
 void ChainProcessingResult::printResult(const std::list<std::unique_ptr<ChainProcessingResult>>& resultList) {
 	int iterateAmount{ std::min(Configuration::maxPrintAmount, static_cast<int>(resultList.size())) };
 
-	int i = 0;
+	int i{ 0 };
 	for (const auto& result : resultList) {
 		if (i == iterateAmount)
 			break;

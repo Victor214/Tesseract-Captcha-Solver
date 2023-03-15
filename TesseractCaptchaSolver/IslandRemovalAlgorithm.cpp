@@ -7,17 +7,17 @@ IslandRemovalAlgorithm::IslandRemovalAlgorithm()
 }
 
 void IslandRemovalAlgorithm::process(ImageResolutionQuery& imageResolutionQuery) {
-	cv::Mat& image = *(imageResolutionQuery.image);
-	cv::Mat invertedImage = cv::Scalar::all(255) - image;
-	cv::Mat mask = cv::Mat::zeros(invertedImage.size(), CV_8UC1);
+	cv::Mat& image{ *(imageResolutionQuery.image) };
+	cv::Mat invertedImage{ cv::Scalar::all(255) - image };
+	cv::Mat mask{ cv::Mat::zeros(invertedImage.size(), CV_8UC1) };
 
 	// Get information about components and their sizes
 	cv::Mat labels, stats, centroids;
-	int totalComponents = cv::connectedComponentsWithStats(invertedImage, labels, stats, centroids, 8, CV_32S);
+	int totalComponents{ cv::connectedComponentsWithStats(invertedImage, labels, stats, centroids, 8, CV_32S) };
 
 	// Iterate through components, removing the ones below threshold by total area
-	int areaThreshold = minThreshold + (this->parameters[AlgorithmsParameterEnum::ISLANDREMOVALTHRESHOLD] * (maxThreshold - minThreshold)) / (this->maxParameters[AlgorithmsParameterEnum::ISLANDREMOVALTHRESHOLD] - 1);
-	for (int i = 1; i < totalComponents; i++)
+	int areaThreshold{ minThreshold + (this->parameters[AlgorithmsParameterEnum::ISLANDREMOVALTHRESHOLD] * (maxThreshold - minThreshold)) / (this->maxParameters[AlgorithmsParameterEnum::ISLANDREMOVALTHRESHOLD] - 1) };
+	for (int i{ 1 }; i < totalComponents; i++)
 	{
 		if (stats.at<int>(i, cv::CC_STAT_AREA) < areaThreshold)
 		{

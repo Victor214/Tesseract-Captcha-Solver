@@ -25,7 +25,7 @@ std::unique_ptr<ChainProcessingResult> AlgorithmChainProcessor::process() {
 			continue;
 
 		std::string fileName{ entry.path().stem().u8string() };
-		std::unique_ptr<ImageResolutionQuery> imageQuery = std::make_unique<ImageResolutionQuery>(fileName);
+		std::unique_ptr<ImageResolutionQuery> imageQuery{ std::make_unique<ImageResolutionQuery>(fileName) };
 		chain->process(*imageQuery);
 
 		if (imageQuery->captchaSolution == imageQuery->captchaProposedSolution)
@@ -34,7 +34,7 @@ std::unique_ptr<ChainProcessingResult> AlgorithmChainProcessor::process() {
 	}
 
 	// Compute success rate, chain info and return results
-	double successRate = (successCount * 100) / readCount;
-	std::string chainDescription = this->chain->getChainDescription();
+	double successRate{ (successCount * 100.0) / readCount };
+	std::string chainDescription{ this->chain->getChainDescription() };
 	return std::make_unique<ChainProcessingResult>(successRate, chainDescription);
 }

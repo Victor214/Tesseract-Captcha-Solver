@@ -13,7 +13,7 @@ void Algorithm::addToHead(std::unique_ptr<Algorithm>& currentHead, std::unique_p
 }
 
 void Algorithm::addToTail(std::unique_ptr<Algorithm>& currentHead, std::unique_ptr<Algorithm>& algo) {
-	Algorithm* current = currentHead.get();
+	Algorithm* current{ currentHead.get() };
 	while (current->successor != nullptr) {
 		current = current->successor.get();
 	}
@@ -23,7 +23,7 @@ void Algorithm::addToTail(std::unique_ptr<Algorithm>& currentHead, std::unique_p
 }
 
 int Algorithm::getTotalParameterCombinationAmount() const {
-	int total = 1;
+	int total{ 1 };
 	for (auto const& maxParam : maxParameters) {
 		total *= maxParam.second;
 	}
@@ -31,10 +31,10 @@ int Algorithm::getTotalParameterCombinationAmount() const {
 }
 
 void Algorithm::writeParameters(int currentParamCount) {
-	int divisor = 1;
+	int divisor{ 1 };
 	for (auto const& maxParam : maxParameters) {
-		int maxParameterValue = maxParam.second;
-		int parameterValue = (currentParamCount / divisor) % maxParameterValue;
+		int maxParameterValue{ maxParam.second };
+		int parameterValue{ (currentParamCount / divisor) % maxParameterValue };
 		parameters.emplace(maxParam.first, parameterValue);
 		divisor *= maxParameterValue;
 	}
@@ -42,10 +42,10 @@ void Algorithm::writeParameters(int currentParamCount) {
 
 std::string Algorithm::getChainDescription() {
 	std::stringstream description;
-	const Algorithm* current = this;
+	const Algorithm* current{ this };
 	while (current != nullptr)
 	{
-		AlgorithmsEnum algoEnum = current->getAlgorithmEnum();
+		AlgorithmsEnum algoEnum{ current->getAlgorithmEnum() };
 		description << algoEnum << ":";
 		for (auto param : current->parameters) {
 			description << " [" << param.first << ", " << param.second << "]";

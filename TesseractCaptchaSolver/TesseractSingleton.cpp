@@ -3,7 +3,7 @@
 #include "Configuration.hpp"
 #include "TesseractSingleton.hpp"
 
-std::unique_ptr<TesseractSingleton> TesseractSingleton::tesseractInstance = nullptr;
+std::unique_ptr<TesseractSingleton> TesseractSingleton::tesseractInstance{ nullptr };
 
 TesseractSingleton::TesseractSingleton() {
 	tessBaseApi.Init(Configuration::tesseractPath.c_str(), "eng", tesseract::OEM_DEFAULT);
@@ -20,7 +20,7 @@ TesseractSingleton& TesseractSingleton::getInstance() {
 }
 
 std::string TesseractSingleton::recognize(const cv::Mat& image) {
-	TesseractSingleton& tesseractSingleton = TesseractSingleton::getInstance();
+	TesseractSingleton& tesseractSingleton{ TesseractSingleton::getInstance() };
 	tesseractSingleton.tessBaseApi.SetImage(image.data, image.cols, image.rows, 1, image.cols);
 	tesseractSingleton.tessBaseApi.Recognize(NULL);
 

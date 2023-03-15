@@ -20,14 +20,14 @@ AlgorithmChainBuilder::AlgorithmChainBuilder()
 }
 
 bool AlgorithmChainBuilder::hasCurrentChain() { // Verifies if it has more variations in algorithm sequences to be called, or if work has ended.
-	int maxChains = static_cast<int>(pow(2, Configuration::algorithmsPool.size())) - 1;
+	int maxChains{ static_cast<int>(pow(2, Configuration::algorithmsPool.size())) - 1 };
 	if (nextId > maxChains)
 		return false;
 	return true;
 }
 
 bool AlgorithmChainBuilder::hasMoreParameterCombinations(const Algorithm& chain) { // Verifies if has more parameter combinations, or if all parameter combinations have been exhausted for the current combination of algorithms.
-	const Algorithm* current = &chain;
+	const Algorithm* current{ &chain };
 	while (current != nullptr)
 	{
 		if (!isAlgorithmParameterCounterMaxed(*current))
@@ -38,8 +38,8 @@ bool AlgorithmChainBuilder::hasMoreParameterCombinations(const Algorithm& chain)
 }
 
 bool AlgorithmChainBuilder::isAlgorithmParameterCounterMaxed(const Algorithm& algo) {
-	AlgorithmsEnum algoEnum = algo.getAlgorithmEnum();
-	int maxParamAmount = algo.getTotalParameterCombinationAmount();
+	AlgorithmsEnum algoEnum{ algo.getAlgorithmEnum() };
+	int maxParamAmount{ algo.getTotalParameterCombinationAmount() };
 	if (this->currentParameterCount[algoEnum] < maxParamAmount - 1) // If current algorithm total parameter combinations is below the max amount.
 		return false;
 	return true;
@@ -57,10 +57,10 @@ void AlgorithmChainBuilder::iterateNextCombination() {
 
 
 void AlgorithmChainBuilder::incrementParameterCounters(Algorithm& chain) {
-	const Algorithm* current = &chain;
+	const Algorithm* current{ &chain };
 	while (current != nullptr)
 	{
-		AlgorithmsEnum algoEnum = current->getAlgorithmEnum();
+		AlgorithmsEnum algoEnum{ current->getAlgorithmEnum() };
 		if (!isAlgorithmParameterCounterMaxed(*current)) {
 			currentParameterCount[algoEnum]++;
 			return;
@@ -72,12 +72,12 @@ void AlgorithmChainBuilder::incrementParameterCounters(Algorithm& chain) {
 }
 
 std::unique_ptr<Algorithm> AlgorithmChainBuilder::getCombinationFromId(int id) {
-	std::unique_ptr<Algorithm> prev = nullptr;
+	std::unique_ptr<Algorithm> prev{ nullptr };
 	for (int i = Configuration::algorithmsPool.size() - 1; i >= 0; i--) {
-		auto algoEnum = Configuration::algorithmsPool[i];
-		bool shouldPickAlgo = ((id >> i) & 1) == 1;
+		AlgorithmsEnum algoEnum{ Configuration::algorithmsPool[i] };
+		bool shouldPickAlgo{ ((id >> i) & 1) == 1 };
 		if (shouldPickAlgo) {
-			std::unique_ptr<Algorithm> current = AlgorithmFactory::createAlgorithm(algoEnum);
+			std::unique_ptr<Algorithm> current{ AlgorithmFactory::createAlgorithm(algoEnum) };
 			Algorithm::addToHead(prev, current); // Prev is now the new head
 		}
 	}
@@ -86,10 +86,10 @@ std::unique_ptr<Algorithm> AlgorithmChainBuilder::getCombinationFromId(int id) {
 }
 
 void AlgorithmChainBuilder::adjustAlgorithmParameters(Algorithm& chain) {
-	Algorithm* current = &chain;
+	Algorithm* current{ &chain };
 	while (current != nullptr)
 	{
-		auto algoEnum = current->getAlgorithmEnum();
+		AlgorithmsEnum algoEnum{ current->getAlgorithmEnum() };
 		current->writeParameters(currentParameterCount[algoEnum]);
 		current = (current->successor).get();
 	}
@@ -98,7 +98,7 @@ void AlgorithmChainBuilder::adjustAlgorithmParameters(Algorithm& chain) {
 bool AlgorithmChainBuilder::isValidCombination(const Algorithm& chain) {
 	// Convert current algorithms into a set for easy lookup
 	std::unordered_set<AlgorithmsEnum> algorithmsInChain;
-	const Algorithm* current = &chain;
+	const Algorithm* current{ &chain };
 	while (current != nullptr)
 	{
 		algorithmsInChain.emplace(current->getAlgorithmEnum());
@@ -118,7 +118,7 @@ std::unique_ptr<Algorithm> AlgorithmChainBuilder::getNextValidCombination() {
 		if (!hasCurrentChain())
 			return nullptr;
 
-		std::unique_ptr<Algorithm> chain = getCombinationFromId(nextId); // We know for sure this exists, but still need to make sure it is valid.
+		std::unique_ptr<Algorithm> chain{ getCombinationFromId(nextId) }; // We know for sure this exists, but still need to make sure it is valid.
 		if (isValidCombination(*chain))
 			return chain;
 
@@ -128,15 +128,15 @@ std::unique_ptr<Algorithm> AlgorithmChainBuilder::getNextValidCombination() {
 
 // Adds core algorithms which are invariant, are not related to image processing, and are always required for the chain to properly work.
 void AlgorithmChainBuilder::addCoreAlgorithms(std::unique_ptr<Algorithm>& chain) {
-	std::unique_ptr<Algorithm> imageReader = std::make_unique<ImageReaderAlgorithm>();
+	std::unique_ptr<Algorithm> imageReader{ std::make_unique<ImageReaderAlgorithm>() };
 	Algorithm::addToHead(chain, imageReader);
 
-	std::unique_ptr<Algorithm> tesseractScanner = std::make_unique<TesseractScannerAlgorithm>();
+	std::unique_ptr<Algorithm> tesseractScanner{ std::make_unique<TesseractScannerAlgorithm>() };
 	Algorithm::addToTail(chain, tesseractScanner);
 }
 
 std::unique_ptr<Algorithm> AlgorithmChainBuilder::returnNextChain() {
-	std::unique_ptr<Algorithm> chain = getNextValidCombination();
+	std::unique_ptr<Algorithm> chain{ getNextValidCombination() };
 	if (!chain) {
 		return nullptr;
 	}
