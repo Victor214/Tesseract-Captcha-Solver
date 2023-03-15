@@ -55,9 +55,6 @@ static bool algorithmCompare(const std::unique_ptr<Algorithm>& a, const std::uni
 }
 
 void Algorithm::process(ImageResolutionQuery& imageResolutionQuery) {
-	if (Configuration::isDebugEnabled)
-		printDebugAlgorithm();
-
 	if (successor != nullptr)
 		successor->process(imageResolutionQuery);
 }
@@ -68,10 +65,11 @@ std::string Algorithm::getChainDescription() {
 	while (current != nullptr)
 	{
 		AlgorithmsEnum algoEnum = current->getAlgorithmEnum();
-		description << algoEnum << ":" << "\n";
+		description << algoEnum << ":";
 		for (auto param : current->parameters) {
-			description << "	* [" << param.first << ", " << param.second << "] \n";
+			description << " [" << param.first << ", " << param.second << "]";
 		}
+		description << "\n";
 
 		current = (current->successor).get();
 	}

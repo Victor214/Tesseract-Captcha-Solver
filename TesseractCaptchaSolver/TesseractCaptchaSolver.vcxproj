@@ -143,6 +143,7 @@
     <ClCompile Include="ImageReaderAlgorithm.cpp" />
     <ClCompile Include="IslandRemovalAlgorithm.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="TrimWhitespaceAlgorithm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AlgorithmChainBuilder.hpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="GreyscaleAlgorithm.hpp" />
     <ClInclude Include="ImageReaderAlgorithm.hpp" />
     <ClInclude Include="IslandRemovalAlgorithm.hpp" />
+    <ClInclude Include="TrimWhitespaceAlgorithm.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

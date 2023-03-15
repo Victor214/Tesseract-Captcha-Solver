@@ -13,7 +13,7 @@ class ChainProcessingResult
 		std::string chainDescription;
 
 		static bool resultOrderComparator(const std::unique_ptr<ChainProcessingResult>& a, const std::unique_ptr<ChainProcessingResult>& b) {
-			return a->resultPercentage < b->resultPercentage;
+			return a->resultPercentage > b->resultPercentage;
 		}
 };
 

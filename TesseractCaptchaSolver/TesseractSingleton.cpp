@@ -16,6 +16,7 @@ TesseractSingleton::TesseractSingleton() {
 	tessBaseApi.Init(Configuration::tesseractPath.c_str(), "eng", tesseract::OEM_DEFAULT);
 	tessBaseApi.SetPageSegMode(tesseract::PSM_AUTO_OSD);
 	tessBaseApi.SetVariable("tessedit_char_whitelist", Configuration::tesseractCharPool.c_str());
+	tessBaseApi.SetVariable("debug_file", "tesseract.log");
 }
 
 std::string TesseractSingleton::recognize(const cv::Mat& image) {
@@ -24,5 +25,10 @@ std::string TesseractSingleton::recognize(const cv::Mat& image) {
 	tesseractSingleton.tessBaseApi.Recognize(NULL);
 
 	std::string text{ tesseractSingleton.tessBaseApi.GetUTF8Text() };
+
+	// Remove Whitespaces and new lines
+	text.erase(std::remove(text.begin(), text.end(), '\n'), text.cend());
+	text.erase(std::remove(text.begin(), text.end(), '\r'), text.cend());
+
 	return text;
 }

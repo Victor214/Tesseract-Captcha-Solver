@@ -10,7 +10,7 @@ public:
 
 private:
 	void insertMaxParameterConfiguration() {
-		this->maxParameters.emplace(AlgorithmsParameterEnum::ISLANDREMOVALTHRESHOLD, 5);
+		this->maxParameters.emplace(AlgorithmsParameterEnum::ISLANDREMOVALTHRESHOLD, 3);
 	}
 
 	constexpr static int minThreshold = 15; // What should be the minimum amount to threshold. Thresholds too small may leave too much noise.

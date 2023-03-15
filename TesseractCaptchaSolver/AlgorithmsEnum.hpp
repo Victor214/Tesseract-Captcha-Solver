@@ -12,6 +12,7 @@ enum class AlgorithmsEnum
     THRESHOLD,
     ISLANDREMOVAL,
     MEDIANFILTER,
+    TRIMWHITESPACE,
     TESSERACTSCANNER,
 };
 
@@ -26,6 +27,7 @@ inline std::ostream& operator<<(std::ostream& out, const AlgorithmsEnum value) {
         PROCESS_VAL(AlgorithmsEnum::THRESHOLD);
         PROCESS_VAL(AlgorithmsEnum::ISLANDREMOVAL);
         PROCESS_VAL(AlgorithmsEnum::MEDIANFILTER);
+        PROCESS_VAL(AlgorithmsEnum::TRIMWHITESPACE);
         PROCESS_VAL(AlgorithmsEnum::TESSERACTSCANNER);
     }
 #undef PROCESS_VAL

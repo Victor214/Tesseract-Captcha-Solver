@@ -1,6 +1,7 @@
 #include <iostream>
 #include <filesystem>
 #include <memory>
+#include "Configuration.hpp"
 #include "Algorithm.hpp"
 #include "AlgorithmChainProcessor.hpp"
 #include "ChainProcessingResult.hpp"
@@ -12,6 +13,9 @@ AlgorithmChainProcessor::AlgorithmChainProcessor(std::unique_ptr<Algorithm> chai
 std::unique_ptr<ChainProcessingResult> AlgorithmChainProcessor::process() {
 	if (chain == nullptr)
 		throw std::invalid_argument("A chain was not found to be processed.");
+
+	if (Configuration::isDebugEnabled)
+		std::cout << this->chain->getChainDescription();
 
 	int readCount{0};
 	int successCount{0};

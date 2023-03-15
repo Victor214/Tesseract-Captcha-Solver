@@ -12,6 +12,8 @@ private:
 	void insertMaxParameterConfiguration() {
 		this->maxParameters.emplace(AlgorithmsParameterEnum::MEDIANFILTERSIZE, 3);
 	}
+
+	constexpr static int minSize = 3; // What should be the minimum size of the median filter. >>> Make sure this is always an odd number <<<
 };
 
 #endif

@@ -14,6 +14,7 @@
 #include "ThresholdAlgorithm.hpp"
 #include "IslandRemovalAlgorithm.hpp"
 #include "MedianFilterAlgorithm.hpp"
+#include "TrimWhitespaceAlgorithm.hpp"
 #include "TesseractScannerAlgorithm.hpp"
 
 AlgorithmChainBuilder::AlgorithmChainBuilder() 
@@ -49,6 +50,9 @@ std::unique_ptr<Algorithm> AlgorithmChainBuilder::getAlgorithmFromEnum(Algorithm
 
 		case AlgorithmsEnum::MEDIANFILTER:
 			return std::make_unique<MedianFilterAlgorithm>();
+
+		case AlgorithmsEnum::TRIMWHITESPACE:
+			return std::make_unique<TrimWhitespaceAlgorithm>();
 
 		default:
 			throw std::invalid_argument("This algorithm is not implemented yet, please pass a valid algorithm.");

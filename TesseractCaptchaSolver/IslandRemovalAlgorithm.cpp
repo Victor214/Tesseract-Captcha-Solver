@@ -16,7 +16,7 @@ void IslandRemovalAlgorithm::process(ImageResolutionQuery& imageResolutionQuery)
 	int totalComponents = cv::connectedComponentsWithStats(invertedImage, labels, stats, centroids, 8, CV_32S);
 
 	// Iterate through components, removing the ones below threshold by total area
-	int areaThreshold = minThreshold + (this->parameters[AlgorithmsParameterEnum::ISLANDREMOVALTHRESHOLD] * (maxThreshold - minThreshold)) / (this->maxParameters[AlgorithmsParameterEnum::ISLANDREMOVALTHRESHOLD] - 1);;
+	int areaThreshold = minThreshold + (this->parameters[AlgorithmsParameterEnum::ISLANDREMOVALTHRESHOLD] * (maxThreshold - minThreshold)) / (this->maxParameters[AlgorithmsParameterEnum::ISLANDREMOVALTHRESHOLD] - 1);
 	for (int i = 1; i < totalComponents; i++)
 	{
 		if (stats.at<int>(i, cv::CC_STAT_AREA) < areaThreshold)

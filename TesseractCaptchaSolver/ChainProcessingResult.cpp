@@ -15,6 +15,9 @@ void ChainProcessingResult::printResult(const std::list<std::unique_ptr<ChainPro
 		if (i == iterateAmount)
 			break;
 
+		std::cout << (i+1) << ")" << "\n";
 		std::cout << result->chainDescription;
+		std::cout << "Success Rate: " << result->resultPercentage << "%\n\n";
+		i++;
 	}
 }
