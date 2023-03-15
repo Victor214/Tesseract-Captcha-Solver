@@ -4,14 +4,14 @@
 #include "Algorithm.hpp"
 
 class ImageReaderAlgorithm : public Algorithm {
-public:
-	ImageReaderAlgorithm();
-	virtual void process(ImageResolutionQuery& imageResolutionQuery) override;
+	public:
+		ImageReaderAlgorithm();
+		virtual void process(ImageResolutionQuery& imageResolutionQuery) override;
 
-private:
-	void insertMaxParameterConfiguration() {
+	private:
+		void insertMaxParameterConfiguration() {
 
-	}
+		}
 };
 
 #endif

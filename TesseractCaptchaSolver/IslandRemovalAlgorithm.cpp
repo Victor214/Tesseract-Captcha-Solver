@@ -28,6 +28,7 @@ void IslandRemovalAlgorithm::process(ImageResolutionQuery& imageResolutionQuery)
 		}
 	}
 
+	// Removes mask from inverted image, and outputs to image
 	cv::compare(invertedImage, mask, image, cv::CMP_EQ);
 	//cv::imshow("Result", image);
 	//cv::waitKey(0);

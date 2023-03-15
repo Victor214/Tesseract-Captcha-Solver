@@ -40,23 +40,6 @@ void Algorithm::writeParameters(int currentParamCount) {
 	}
 }
 
-void Algorithm::printDebugAlgorithm() const {
-	std::cout << algorithmEnum << ": ";
-	for (auto param : parameters) {
-		std::cout << "[" << param.first << ", " << param.second << "] ";
-	}
-	std::cout << std::endl;
-}
-
-static bool algorithmCompare(const std::unique_ptr<Algorithm>& a, const std::unique_ptr<Algorithm>& b) {
-	return a->getAlgorithmEnum() < b->getAlgorithmEnum();
-}
-
-void Algorithm::process(ImageResolutionQuery& imageResolutionQuery) {
-	if (successor != nullptr)
-		successor->process(imageResolutionQuery);
-}
-
 std::string Algorithm::getChainDescription() {
 	std::stringstream description;
 	const Algorithm* current = this;
@@ -75,11 +58,12 @@ std::string Algorithm::getChainDescription() {
 	return description.str();
 }
 
+void Algorithm::process(ImageResolutionQuery& imageResolutionQuery) {
+	if (successor != nullptr)
+		successor->process(imageResolutionQuery);
+}
+
 // Gets & Sets
 AlgorithmsEnum Algorithm::getAlgorithmEnum() const {
 	return this->algorithmEnum;
-}
-
-void Algorithm::setAlgorithmEnum(AlgorithmsEnum algorithmEnum) {
-	this->algorithmEnum = algorithmEnum;
 }

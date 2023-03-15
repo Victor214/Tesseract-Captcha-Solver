@@ -19,23 +19,12 @@ AlgorithmChainBuilder::AlgorithmChainBuilder()
 	}
 }
 
-void AlgorithmChainBuilder::iterateNextCombination() {
-	// Increment nextId, so a chain with different algorithms is generated
-	nextId++;
-
-	// Reset Parameter Counters
-	for (auto& currParam : currentParameterCount) {
-		currParam.second = 0;
-	}
-}
-
 bool AlgorithmChainBuilder::hasCurrentChain() { // Verifies if it has more variations in algorithm sequences to be called, or if work has ended.
 	int maxChains = static_cast<int>(pow(2, Configuration::algorithmsPool.size())) - 1;
 	if (nextId > maxChains)
 		return false;
 	return true;
 }
-
 
 bool AlgorithmChainBuilder::hasMoreParameterCombinations(const Algorithm& chain) { // Verifies if has more parameter combinations, or if all parameter combinations have been exhausted for the current combination of algorithms.
 	const Algorithm* current = &chain;
@@ -55,6 +44,17 @@ bool AlgorithmChainBuilder::isAlgorithmParameterCounterMaxed(const Algorithm& al
 		return false;
 	return true;
 }
+
+void AlgorithmChainBuilder::iterateNextCombination() {
+	// Increment nextId, so a chain with different algorithms is generated
+	nextId++;
+
+	// Reset Parameter Counters
+	for (auto& currParam : currentParameterCount) {
+		currParam.second = 0;
+	}
+}
+
 
 void AlgorithmChainBuilder::incrementParameterCounters(Algorithm& chain) {
 	const Algorithm* current = &chain;
@@ -95,15 +95,6 @@ void AlgorithmChainBuilder::adjustAlgorithmParameters(Algorithm& chain) {
 	}
 }
 
-// Adds core algorithms which are invariant, are not related to image processing, and are always required for the chain to properly work.
-void AlgorithmChainBuilder::addCoreAlgorithms(std::unique_ptr<Algorithm>& chain) {
-	std::unique_ptr<Algorithm> imageReader = std::make_unique<ImageReaderAlgorithm>();
-	Algorithm::addToHead(chain, imageReader);
-
-	std::unique_ptr<Algorithm> tesseractScanner = std::make_unique<TesseractScannerAlgorithm>();
-	Algorithm::addToTail(chain, tesseractScanner);
-}
-
 bool AlgorithmChainBuilder::isValidCombination(const Algorithm& chain) {
 	// Convert current algorithms into a set for easy lookup
 	std::unordered_set<AlgorithmsEnum> algorithmsInChain;
@@ -133,6 +124,15 @@ std::unique_ptr<Algorithm> AlgorithmChainBuilder::getNextValidCombination() {
 
 		iterateNextCombination();
 	} while (true);
+}
+
+// Adds core algorithms which are invariant, are not related to image processing, and are always required for the chain to properly work.
+void AlgorithmChainBuilder::addCoreAlgorithms(std::unique_ptr<Algorithm>& chain) {
+	std::unique_ptr<Algorithm> imageReader = std::make_unique<ImageReaderAlgorithm>();
+	Algorithm::addToHead(chain, imageReader);
+
+	std::unique_ptr<Algorithm> tesseractScanner = std::make_unique<TesseractScannerAlgorithm>();
+	Algorithm::addToTail(chain, tesseractScanner);
 }
 
 std::unique_ptr<Algorithm> AlgorithmChainBuilder::returnNextChain() {

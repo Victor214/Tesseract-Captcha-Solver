@@ -19,6 +19,9 @@ void TrimWhitespaceAlgorithm::process(ImageResolutionQuery& imageResolutionQuery
 		cv::Mat roi{ image, cv::Rect{bounding_box.x, bounding_box.y, bounding_box.width, bounding_box.height} };
 		roi.copyTo(image);
 		cv::copyMakeBorder(image, image, 20, 20, 20, 20, cv::BORDER_CONSTANT, cv::Scalar(255));
+
+		//cv::imshow("Trimmed", image);
+		//cv::waitKey(0);
 	}
 
 	Algorithm::process(imageResolutionQuery);

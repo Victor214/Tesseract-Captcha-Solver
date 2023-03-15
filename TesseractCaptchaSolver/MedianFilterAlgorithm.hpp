@@ -4,16 +4,16 @@
 #include "Algorithm.hpp"
 
 class MedianFilterAlgorithm : public Algorithm {
-public:
-	MedianFilterAlgorithm();
-	virtual void process(ImageResolutionQuery& imageResolutionQuery) override;
+	public:
+		MedianFilterAlgorithm();
+		virtual void process(ImageResolutionQuery& imageResolutionQuery) override;
 
-private:
-	void insertMaxParameterConfiguration() {
-		this->maxParameters.emplace(AlgorithmsParameterEnum::MEDIANFILTERSIZE, 3);
-	}
+	private:
+		void insertMaxParameterConfiguration() {
+			this->maxParameters.emplace(AlgorithmsParameterEnum::MEDIANFILTERSIZE, 3);
+		}
 
-	constexpr static int minSize = 3; // What should be the minimum size of the median filter. >>> Make sure this is always an odd number <<<
+		constexpr static int minSize = 3; // What should be the minimum size of the median filter. >>> Make sure this is always an odd number <<<
 };
 
 #endif

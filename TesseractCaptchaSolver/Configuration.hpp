@@ -8,6 +8,7 @@
 class Configuration
 {
 	public:
+		Configuration() = delete;
 		const static std::vector<AlgorithmsEnum> algorithmsPool;
 		const static std::vector<std::pair<AlgorithmsEnum, AlgorithmsEnum>> algorithmDependencyList;
 		const static int isDebugEnabled;

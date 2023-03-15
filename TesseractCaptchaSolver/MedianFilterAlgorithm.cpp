@@ -12,6 +12,8 @@ void MedianFilterAlgorithm::process(ImageResolutionQuery& imageResolutionQuery) 
 	// Filter always needs to be an odd number
 	int filterSize = minSize + (this->parameters[AlgorithmsParameterEnum::MEDIANFILTERSIZE] * 2);
 	cv::medianBlur(image, image, filterSize);
+	//cv::imshow("Median Blur", image);
+	//cv::waitKey(0);
 
 	Algorithm::process(imageResolutionQuery);
 }

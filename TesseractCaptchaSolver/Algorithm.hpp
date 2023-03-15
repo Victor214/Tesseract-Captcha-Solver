@@ -17,16 +17,14 @@ class Algorithm
 
 		int getTotalParameterCombinationAmount() const;
 		void writeParameters(int currentParamCount);
-		virtual void printDebugAlgorithm() const;
-		virtual void process(ImageResolutionQuery& imageResolutionQuery);
 		AlgorithmsEnum getAlgorithmEnum() const;
 		std::string getChainDescription();
+		virtual void process(ImageResolutionQuery& imageResolutionQuery);
 
 		std::unique_ptr<Algorithm> successor;
 
 	protected:
 		Algorithm(AlgorithmsEnum algoEnum);
-		void setAlgorithmEnum(AlgorithmsEnum algorithmEnum);
 		std::map<AlgorithmsParameterEnum, int> parameters;
 		std::map<AlgorithmsParameterEnum, int> maxParameters;
 

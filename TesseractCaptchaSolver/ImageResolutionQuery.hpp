@@ -9,8 +9,8 @@ class ImageResolutionQuery
 {
 	public:
 		ImageResolutionQuery(std::string captchaSolution);
-		bool isCorrectSolution();
 		void loadImage();
+		bool isCorrectSolution();
 
 		std::unique_ptr<cv::Mat> image;
 
