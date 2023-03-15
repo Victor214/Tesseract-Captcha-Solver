@@ -3,25 +3,19 @@
 #include <vector>
 #include <cmath>
 #include <unordered_set>
-#include <set>
 
 #include "Configuration.hpp"
 #include "AlgorithmChainBuilder.hpp"
 #include "AlgorithmsParameterEnum.hpp"
+#include "AlgorithmFactory.hpp"
 
 #include "ImageReaderAlgorithm.hpp"
-#include "GreyscaleAlgorithm.hpp"
-#include "ThresholdAlgorithm.hpp"
-#include "IslandRemovalAlgorithm.hpp"
-#include "MedianFilterAlgorithm.hpp"
-#include "TrimWhitespaceAlgorithm.hpp"
 #include "TesseractScannerAlgorithm.hpp"
 
 AlgorithmChainBuilder::AlgorithmChainBuilder() 
 	: nextId{1} {
-	std::vector<AlgorithmsEnum>::const_iterator algoEnumIt;
-	for (algoEnumIt = Configuration::algorithmsPool.cbegin(); algoEnumIt != Configuration::algorithmsPool.cend(); ++algoEnumIt) {
-		currentParameterCount.emplace(*algoEnumIt, 0);
+	for (const auto algoInPool : Configuration::algorithmsPool) {
+		currentParameterCount.emplace(algoInPool, 0);
 	}
 }
 
@@ -30,32 +24,8 @@ void AlgorithmChainBuilder::iterateNextCombination() {
 	nextId++;
 
 	// Reset Parameter Counters
-	std::map<AlgorithmsEnum, int>::iterator currParamIt;
-	for (currParamIt = currentParameterCount.begin(); currParamIt != currentParameterCount.end(); ++currParamIt) {
-		currParamIt->second = 0;
-	}
-}
-
-std::unique_ptr<Algorithm> AlgorithmChainBuilder::getAlgorithmFromEnum(AlgorithmsEnum algorithmEnum) {
-	switch (algorithmEnum)
-	{
-		case AlgorithmsEnum::GREYSCALE:
-			return std::make_unique<GreyscaleAlgorithm>();
-
-		case AlgorithmsEnum::THRESHOLD:
-			return std::make_unique<ThresholdAlgorithm>();
-
-		case AlgorithmsEnum::ISLANDREMOVAL:
-			return std::make_unique<IslandRemovalAlgorithm>();
-
-		case AlgorithmsEnum::MEDIANFILTER:
-			return std::make_unique<MedianFilterAlgorithm>();
-
-		case AlgorithmsEnum::TRIMWHITESPACE:
-			return std::make_unique<TrimWhitespaceAlgorithm>();
-
-		default:
-			throw std::invalid_argument("This algorithm is not implemented yet, please pass a valid algorithm.");
+	for (auto& currParam : currentParameterCount) {
+		currParam.second = 0;
 	}
 }
 
@@ -107,7 +77,7 @@ std::unique_ptr<Algorithm> AlgorithmChainBuilder::getCombinationFromId(int id) {
 		auto algoEnum = Configuration::algorithmsPool[i];
 		bool shouldPickAlgo = ((id >> i) & 1) == 1;
 		if (shouldPickAlgo) {
-			std::unique_ptr<Algorithm> current = getAlgorithmFromEnum(algoEnum);
+			std::unique_ptr<Algorithm> current = AlgorithmFactory::createAlgorithm(algoEnum);
 			Algorithm::addToHead(prev, current); // Prev is now the new head
 		}
 	}

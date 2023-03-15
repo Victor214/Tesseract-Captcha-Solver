@@ -132,6 +132,7 @@
     <ClCompile Include="AlgorithmChainBuilder.cpp" />
     <ClCompile Include="Algorithm.cpp" />
     <ClCompile Include="AlgorithmChainProcessor.cpp" />
+    <ClCompile Include="AlgorithmFactory.cpp" />
     <ClCompile Include="ChainProcessingResult.cpp" />
     <ClCompile Include="Configuration.cpp" />
     <ClCompile Include="MedianFilterAlgorithm.cpp" />
@@ -149,6 +150,7 @@
     <ClInclude Include="AlgorithmChainBuilder.hpp" />
     <ClInclude Include="Algorithm.hpp" />
     <ClInclude Include="AlgorithmChainProcessor.hpp" />
+    <ClInclude Include="AlgorithmFactory.hpp" />
     <ClInclude Include="AlgorithmsEnum.hpp" />
     <ClInclude Include="AlgorithmsParameterEnum.hpp" />
     <ClInclude Include="ChainProcessingResult.hpp" />

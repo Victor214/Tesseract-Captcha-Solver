@@ -14,7 +14,6 @@ class AlgorithmChainBuilder
 
 	private:
 		void iterateNextCombination();
-		std::unique_ptr<Algorithm> getAlgorithmFromEnum(AlgorithmsEnum algorithmEnum);
 		bool hasCurrentChain();
 		bool hasMoreParameterCombinations(const Algorithm& chain);
 		bool isAlgorithmParameterCounterMaxed(const Algorithm& algo);

@@ -66,6 +66,9 @@
     <ClCompile Include="TrimWhitespaceAlgorithm.cpp">
       <Filter>Source Files\Algorithms</Filter>
     </ClCompile>
+    <ClCompile Include="AlgorithmFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AlgorithmsEnum.hpp">
@@ -115,6 +118,9 @@
     </ClInclude>
     <ClInclude Include="TrimWhitespaceAlgorithm.hpp">
       <Filter>Header Files\Algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="AlgorithmFactory.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -24,20 +24,18 @@ void Algorithm::addToTail(std::unique_ptr<Algorithm>& currentHead, std::unique_p
 
 int Algorithm::getTotalParameterCombinationAmount() const {
 	int total = 1;
-	std::map<AlgorithmsParameterEnum, int>::const_iterator it;
-	for (it = maxParameters.cbegin(); it != maxParameters.cend(); ++it) {
-		total *= it->second;
+	for (auto const& maxParam : maxParameters) {
+		total *= maxParam.second;
 	}
 	return total;
 }
 
 void Algorithm::writeParameters(int currentParamCount) {
 	int divisor = 1;
-	std::map<AlgorithmsParameterEnum, int>::iterator algoParamMaxIt;
-	for (algoParamMaxIt = maxParameters.begin(); algoParamMaxIt != maxParameters.end(); ++algoParamMaxIt) {
-		int maxParameterValue = algoParamMaxIt->second;
+	for (auto const& maxParam : maxParameters) {
+		int maxParameterValue = maxParam.second;
 		int parameterValue = (currentParamCount / divisor) % maxParameterValue;
-		parameters.emplace(algoParamMaxIt->first, parameterValue);
+		parameters.emplace(maxParam.first, parameterValue);
 		divisor *= maxParameterValue;
 	}
 }
