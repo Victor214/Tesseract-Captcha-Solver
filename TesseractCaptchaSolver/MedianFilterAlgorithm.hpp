@@ -7,6 +7,7 @@ class MedianFilterAlgorithm : public Algorithm {
 	public:
 		MedianFilterAlgorithm();
 		virtual void process(ImageResolutionQuery& imageResolutionQuery) override;
+		virtual ~MedianFilterAlgorithm() = default;
 
 	private:
 		void insertMaxParameterConfiguration() {

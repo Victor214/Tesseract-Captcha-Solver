@@ -7,6 +7,7 @@ class ImageReaderAlgorithm : public Algorithm {
 	public:
 		ImageReaderAlgorithm();
 		virtual void process(ImageResolutionQuery& imageResolutionQuery) override;
+		virtual ~ImageReaderAlgorithm() = default;
 
 	private:
 		void insertMaxParameterConfiguration() {

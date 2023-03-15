@@ -11,6 +11,7 @@ class ImageResolutionQuery
 		ImageResolutionQuery(std::string captchaSolution);
 		void loadImage();
 		bool isCorrectSolution() const;
+		virtual ~ImageResolutionQuery() = default;
 
 		std::unique_ptr<cv::Mat> image;
 

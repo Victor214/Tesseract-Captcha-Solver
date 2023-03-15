@@ -7,6 +7,7 @@ class ThresholdAlgorithm : public Algorithm {
 	public:
 		ThresholdAlgorithm();
 		virtual void process(ImageResolutionQuery& imageResolutionQuery) override;
+		virtual ~ThresholdAlgorithm() = default;
 
 	private:
 		void insertMaxParameterConfiguration() {

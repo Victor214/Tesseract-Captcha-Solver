@@ -9,6 +9,8 @@ class ChainProcessingResult
 	public:
 		ChainProcessingResult(double resultPercentage, std::string chainDescription);
 		static void printResult(const std::list<std::unique_ptr<ChainProcessingResult>>& resultList);
+		virtual ~ChainProcessingResult() = default;
+
 		double resultPercentage;
 		std::string chainDescription;
 

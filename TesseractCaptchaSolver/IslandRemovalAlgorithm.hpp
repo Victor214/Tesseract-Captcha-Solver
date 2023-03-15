@@ -7,6 +7,7 @@ class IslandRemovalAlgorithm : public Algorithm {
 public:
 	IslandRemovalAlgorithm();
 	virtual void process(ImageResolutionQuery& imageResolutionQuery) override;
+	virtual ~IslandRemovalAlgorithm() = default;
 
 private:
 	void insertMaxParameterConfiguration() {

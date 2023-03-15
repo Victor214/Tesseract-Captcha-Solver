@@ -9,6 +9,7 @@ class TesseractSingleton
 	public:
 		TesseractSingleton(const TesseractSingleton& obj) = delete; // Delete copy constructor
 		static std::string recognize(const cv::Mat& image);
+		virtual ~TesseractSingleton() = default;
 
 	private:
 		TesseractSingleton();

@@ -11,6 +11,7 @@ class AlgorithmChainBuilder
 	public:
 		AlgorithmChainBuilder();
 		std::unique_ptr<Algorithm> returnNextChain();
+		virtual ~AlgorithmChainBuilder() = default;
 
 	private:
 		bool hasCurrentChain() const;

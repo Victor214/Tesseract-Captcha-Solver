@@ -20,6 +20,7 @@ class Algorithm
 		AlgorithmsEnum getAlgorithmEnum() const;
 		std::string getChainDescription() const;
 		virtual void process(ImageResolutionQuery& imageResolutionQuery);
+		virtual ~Algorithm() = default;
 
 		std::unique_ptr<Algorithm> successor;
 

@@ -7,6 +7,7 @@ class TesseractScannerAlgorithm : public Algorithm {
 public:
 	TesseractScannerAlgorithm();
 	virtual void process(ImageResolutionQuery& imageResolutionQuery) override;
+	virtual ~TesseractScannerAlgorithm() = default;
 
 private:
 	void insertMaxParameterConfiguration() {
